@@ -1,0 +1,35 @@
+server:
+  port: 10001
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.56.101:3306/petcelsius
+    username: root
+    password: lqs
+    type: com.alibaba.druid.pool.DruidDataSource
+  jackson:
+    date-format: java.text.SimpleDateFormat
+  redis:
+    database: 0
+    host: 192.168.56.101
+    port: 6379
+    password: # 如果未单独配置默认为空即可
+    timeout: 1000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  session:
+#    store-type: redis
+    timeout: 3600s
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+

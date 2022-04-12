@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcelsius.api.mapper.UserMapper">
+    <!-- SQL语句 -->
+<!--    用户修改个人信息-->
+    <update id="alterByIdself" parameterType="com.petcelsius.api.domain.User">
+        update user
+            <set>
+                <if test="create_time != null"> create_time=#{create_time},</if>
+                <if test="alter_time != null"> alter_time=#{alter_time},</if>
+                <if test="del_mark != null"> del_mark=#{del_mark},</if>
+                <if test="username != null"> username=#{username},</if>
+                <if test="mobile != null"> mobile=#{mobile},</if>
+                <if test="topic != null"> topic=#{topic},</if>
+            </set>
+            where id=#{id}
+    </update>
+
+
+
+
+</mapper>

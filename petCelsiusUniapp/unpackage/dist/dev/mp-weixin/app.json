@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/heart/heart",
+    "pages/cooperate/cooperate",
+    "pages/my/my",
+    "pages/login/login",
+    "pages/alterUserInfo/alterUserInfo"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "宠°C",
+    "navigationBarBackgroundColor": "#C00000",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "selectedColor": "#c00000",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "static/tab_icons/animals.png",
+        "selectedIconPath": "static/tab_icons/animals-active.png"
+      },
+      {
+        "pagePath": "pages/heart/heart",
+        "text": "缅怀",
+        "iconPath": "static/tab_icons/heart.png",
+        "selectedIconPath": "static/tab_icons/heart-acitve.png"
+      },
+      {
+        "pagePath": "pages/cooperate/cooperate",
+        "text": "合作",
+        "iconPath": "static/tab_icons/cooperate.png",
+        "selectedIconPath": "static/tab_icons/cooperate-active.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/tab_icons/my.png",
+        "selectedIconPath": "static/tab_icons/my-active.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

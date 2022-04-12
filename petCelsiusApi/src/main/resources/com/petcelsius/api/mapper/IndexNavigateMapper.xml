@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcelsius.api.mapper.IndexNavigateMapper">
+    <!-- SQL语句 -->
+    <!--    首页的导航栏navigate获取，索引在前六的-->
+    <select id="selectNavigateToSix" resultType="com.petcelsius.api.domain.IndexNavigate">
+        select * from index_navigate order by `index` asc limit 6
+    </select>
+
+
+
+
+
+</mapper>
