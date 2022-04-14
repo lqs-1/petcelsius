@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class User implements Serializable {
+public class User extends BaseDomain implements Serializable {
     private Long id;
     private Date create_time;
     private Date alter_time;
@@ -14,5 +14,4 @@ public class User implements Serializable {
     private String username;
     private String mobile;
     private String topic;
-
 }

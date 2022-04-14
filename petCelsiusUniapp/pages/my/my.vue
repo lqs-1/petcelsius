@@ -53,7 +53,7 @@
 			this.checkUser()
 			// console.log(this.user)
 			// console.log(this.user)
-			console.log("user===>",this.user)
+			// console.log("user===>",this.user)
 			
 		},
 		methods:{
@@ -91,6 +91,9 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: #ffffcc
+	}
 	
 	.userInfo{
 		text-align: center;
@@ -110,6 +113,7 @@
 	.xiang{
 		width: 200rpx;
 		height: 200rpx;
+		border-radius: 50%;
 	}
 	.name .mobile{
 		position: fixed;

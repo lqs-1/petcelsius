@@ -25,6 +25,34 @@
 				<view class="nav-title">{{item.title}}</view>
 			</view>
 		</view>
+		
+		
+		<!-- 楼层 -->
+		<view class="floor-list">
+			<!-- 每一个楼层的item -->
+			<view class="floor-item" v-for="(item, i) in flootList" :key="item.id">
+				<!-- 每一个楼层的标题 -->
+				<image :src="item.title_img" class="floor-title"></image>
+				<!-- 每一个楼层的图片 -->
+				<view class="floor-img-box">
+					<!-- 楼层大图 -->
+					<view class="left-img-box">
+						<image :src="item.floor_index_img" class="floor_index_img" mode="widthFix"></image>
+					</view>
+					<!-- 楼层小图 -->
+					<view class="right-img-box">
+						<view class="right-img-item" v-for="(item2, i2) in item.indexFloorImgList" :key="item2.id">
+							<image  :src="item2.floor_img" class="floor_img" mode="widthFix"></image>
+						</view>
+						
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		
+		
+		
 	</view>
 </template>
 
@@ -34,23 +62,66 @@
 			return {
 				swiperBannerList: [],
 				navibarList: [],
+				flootList: [],
 			};
 		},
 		onShow() {
 			this.getSwiperBannerList()
 			this.getNavigateList()
+			this.getFloorList()
+		},
+		
+		onPullDownRefresh() {
+			this.getSwiperBannerList()
+			this.getNavigateList()
+			this.getFloorList()
 		},
 		methods:{
+			// 获取首页banner列表
 			async getSwiperBannerList(){
 				let response = await uni.$http.get("indexApi/indexBanner")
 				// console.log(response.data.indexBannerList)
 				this.swiperBannerList = response.data.indexBannerList
 			},
-			
+			// 获取首页navigate列表
 			async getNavigateList(){
 				let response = await uni.$http.get("indexApi/indexNavigate")
-				console.log(response.data.indexNavigateList)
+				// console.log(response.data.indexNavigateList)
 				this.navibarList = response.data.indexNavigateList
+			},
+			// 获取首页floor列表
+			async getFloorList(){
+				let response = await uni.$http.get("indexApi/indexFloor")
+				console.log(response.data.indexFloorList)
+				this.flootList = response.data.indexFloorList
+			},
+			
+			
+			
+			
+			// 封装页面跳转函数
+			navigateTo(url){
+				uni.navigateTo({
+					url:url
+				})
+			},
+			// navigate点击跳转
+			navClickHandler(item){
+				if (item.title == "现在预约"){
+					this.navigateTo("../../subpkg/book/booking/booking")
+				}else if (item.title == "预约记录"){
+					this.navigateTo("../../subpkg/book/bookingRecord/bookingRecord")
+				}else if(item.title == "宠物专车"){
+					this.navigateTo("../../subpkg/petNavigate/petCar/petCar")
+				}else if(item.title == "仪容整理"){
+					this.navigateTo("../../subpkg/petNavigate/grooming/grooming")
+				}else if(item.title == "告别仪式"){
+					this.navigateTo("../../subpkg/petNavigate/farewell/farewell")
+				}else{
+					this.navigateTo("../../subpkg/petNavigate/souvenir/souvenir")
+				}
+				console.log(item.title)
+				
 			}
 		}
 		
@@ -58,6 +129,12 @@
 </script>
 
 <style lang="scss">
+	// 背景颜色
+	page{
+		background-color: #ccffff
+		
+	}
+	
 	// 轮播
 	swiper{
 		height: 340rpx;
@@ -72,20 +149,49 @@
 	.nav-list{
 		// 显示到一行
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: wrap;   
 		justify-content: space-around;
-		margin: 60rpx 20rpx;
+		margin: 30rpx 20rpx;
+		background-color: #ffffcc;
 		.nav-item{
 			margin: 30rpx;
+			text-align: center;
 			.nav-img{
 				justify-content: center;
 				width: 100rpx;
 				height: 100rpx;
 			}
 			.nav-title{
-				text-align: left;
+				text-align: center;
+				color: #333;
+				font-size: 30rpx;
 			}
 		}
+	}
+	
+	// 楼层
+	// 楼层
+	.floor-title{
+		margin: 15rpx 0;
+		width: 100%;
+		height: 60rpx;
+	}
+	
+	.floor_index_img{
+		width: 232rpx;
+	}
+	
+	.right-img-box{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		.floor_img{
+			width: 233rpx;
+		}
+	}
+	.floor-img-box{
+		display: flex;
+		
 	}
 
 </style>

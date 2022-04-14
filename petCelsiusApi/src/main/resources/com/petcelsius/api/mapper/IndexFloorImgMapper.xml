@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcelsius.api.mapper.IndexFloorImgMapper">
+    <!-- SQL语句 -->
+    <select id="selectByFloorId" parameterType="long" resultType="com.petcelsius.api.domain.IndexFloorImg">
+        select * from index_floor_img where `floor_id`=#{floorId} order by `index` asc limit 4
+    </select>
+
+
+</mapper>

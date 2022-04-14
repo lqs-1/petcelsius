@@ -2,6 +2,10 @@
 	// 定义页面
 	"pages": [
 	{ 
+		// 首页：banner、navigare、floor
+		// banner:没有动作，没有跳转，单纯显示
+		// navigate:跳转到子页面，完成定量操作
+		// floor:类似于服务展示，也可以跳转到详情
             "path" : "pages/home/home",
             "style" :                                                                                    
             {
@@ -13,6 +17,7 @@
             
         }
 		,{
+			// 宠物缅怀
 		    "path" : "pages/heart/heart",
 		    "style" :                                                                                    
 		    {
@@ -22,6 +27,7 @@
 		    
 		}
 		,{
+			// 宠物合作商
 		    "path" : "pages/cooperate/cooperate",
 		    "style" :                                                                                    
 		    {
@@ -31,6 +37,7 @@
 		    
 		}
         ,{
+			// 个人中心
             "path" : "pages/my/my",
             "style" :                                                                                    
             {
@@ -41,6 +48,7 @@
         }
        
         ,{
+			// 登录页面
             "path" : "pages/login/login",
             "style" :                                                                                    
             {
@@ -51,6 +59,7 @@
         }
         
         ,{
+			// 个人信息修改页面
             "path" : "pages/alterUserInfo/alterUserInfo",
             "style" :                                                                                    
             {
@@ -62,30 +71,89 @@
     ],
 	
 	// 定义页面的子页面，子页面放在subpkg这个分包中
-	// "subPackages":[
-	// 	{
-	// 		// 子页面的根目录
-	// 		"root":"subpkg",
-	// 		// 分包下有哪些页面
-	// 		"pages":[{
- //                    "path" : "active_detail/active_detail",
- //                    "style" :                                                                                    
-	// 					{
-	// 						"navigationBarTitleText": "军犬风采",
-	// 						"enablePullDownRefresh": false
-	// 					}
- //                }]
-	// 	}
-	// ],
+	"subPackages":[
+		{
+			// 预定相关子包
+			"root":"subpkg/book",
+			"pages":[{
+				// 预定
+                    "path" : "booking/booking",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+					// 预定记录
+                    "path" : "bookingRecord/bookingRecord",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ] 
+		},
+		
+		{
+			// 首页navigate功能子包
+			"root":"subpkg/petNavigate",
+			"pages":[{
+				// 宠物专车
+                    "path" : "petCar/petCar",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+					// 仪容整理
+                    "path" : "grooming/grooming",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+					// 告别仪式
+                    "path" : "farewell/farewell",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+					// 纪念物品
+                    "path" : "souvenir/souvenir",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+		}
+	],
 	
 	// 定义全局样式，主要配置窗口和背景的样式
 	"globalStyle": {
 		// 修改标题栏文字颜色
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
+		"enablePullDownRefresh": true,
 		// 修改标题栏文本
 		"navigationBarTitleText": "宠°C",
 		// 修改标题栏颜色
-		"navigationBarBackgroundColor": "#C00000",
+		"navigationBarBackgroundColor": "#66ccff",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"

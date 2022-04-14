@@ -7,11 +7,29 @@
     "pages/login/login",
     "pages/alterUserInfo/alterUserInfo"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "subpkg/book",
+      "pages": [
+        "booking/booking",
+        "bookingRecord/bookingRecord"
+      ]
+    },
+    {
+      "root": "subpkg/petNavigate",
+      "pages": [
+        "petCar/petCar",
+        "grooming/grooming",
+        "farewell/farewell",
+        "souvenir/souvenir"
+      ]
+    }
+  ],
   "window": {
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
     "navigationBarTitleText": "宠°C",
-    "navigationBarBackgroundColor": "#C00000",
+    "navigationBarBackgroundColor": "#66ccff",
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {

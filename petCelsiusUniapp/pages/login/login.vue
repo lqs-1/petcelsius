@@ -43,18 +43,20 @@
 				// 请求登录，返回登录后的用户信息
 			   let response = await uni.$http.post('userApi/loginUser', {"mobile": this.mobile, "smsCode": this.smsCode})
 			   
-			   console.log(response)
+			   // console.log(response)
 			   // 登录成功就存储登录信息
 			   if (response.data.code == 0){
 				   uni.setStorageSync("user", response.data.user)
+				   uni.$showMsg("登录成功")
+				   uni.navigateBack({
+					delta:1
+				   })
 			   }
+			   // 登录失败
 			   if(response.data.code == 1){
 				   uni.$showMsg("登录失败")
 			   }
-			   uni.$showMsg("登录成功")
-			   uni.navigateBack({
-			   	delta:1
-			   })
+			   
             },
 			
 			// 获取验证码

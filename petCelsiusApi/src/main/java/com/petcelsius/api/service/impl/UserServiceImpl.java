@@ -6,6 +6,7 @@ import com.petcelsius.api.domain.User;
 import com.petcelsius.api.mapper.UserMapper;
 import com.petcelsius.api.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("UserService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -18,7 +19,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
+    /**
+     * 修改用户信息
+     *
+     * @param alterUser: 要修改的信息
+     */
     @Override
+    @Transactional
     public void updateByIdself(User alterUser) {
         this.baseMapper.alterByIdself(alterUser);
     }

@@ -57,3 +57,51 @@ class IndexNavigate(BaseDB, models.Model):
 
     def __str__(self):
         return self.title
+
+
+# 首页楼层基本信息
+class IndexFloor(BaseDB, models.Model):
+
+    title = models.CharField(max_length=30, null=False, verbose_name="楼层名称", unique=True)
+    title_img = models.ImageField(null=False, verbose_name="楼层标题logo")
+    floor_index_img = models.ImageField(null=False, verbose_name="楼层示图")
+    index = models.IntegerField(verbose_name="排序", default=1, null=False)
+
+    class Meta:
+        db_table = "index_floor"
+        verbose_name = "首页楼层"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.title
+
+
+# 首页楼层图片
+class IndexFloorImage(BaseDB, models.Model):
+
+    floor = models.ForeignKey('IndexFloor', verbose_name='所属楼层', on_delete=models.CASCADE)
+    detail = models.OneToOneField("IndexFloorDetail", verbose_name="所有内容", on_delete=models.CASCADE)
+    floor_img = models.ImageField(null=False, verbose_name="楼层内容图")
+    index = models.IntegerField(verbose_name="排序", default=1, null=False)
+
+    class Meta:
+        db_table = "index_floor_img"
+        verbose_name = "首页楼层图片"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.detail.name
+
+
+# 首页楼层详情
+class IndexFloorDetail(BaseDB, models.Model):
+
+    name = models.CharField(max_length=30, verbose_name="占位", null=False)
+
+    class Meta:
+        db_table = "index_floor_detail"
+        verbose_name = "首页楼层详情"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name

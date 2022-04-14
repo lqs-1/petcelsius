@@ -2,7 +2,6 @@ package com.petcelsius.api.controller;
 
 
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClient;
 import com.petcelsius.api.domain.User;
 import com.petcelsius.api.service.UserService;
 import com.petcelsius.api.utils.*;
@@ -18,11 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 

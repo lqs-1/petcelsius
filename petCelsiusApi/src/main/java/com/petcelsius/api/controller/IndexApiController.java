@@ -4,16 +4,15 @@ package com.petcelsius.api.controller;
 import com.petcelsius.api.domain.IndexBanner;
 import com.petcelsius.api.domain.IndexNavigate;
 import com.petcelsius.api.service.IndexBannerService;
+import com.petcelsius.api.service.IndexFloorService;
 import com.petcelsius.api.service.IndexNavigateService;
 import com.petcelsius.api.utils.R;
+import com.petcelsius.api.vo.IndexFloorVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
 @RestController
 @RequestMapping("indexApi")
 public class IndexApiController {
@@ -23,11 +22,14 @@ public class IndexApiController {
     @Autowired
     private IndexNavigateService indexNavigateService;
 
+    @Autowired
+    private IndexFloorService indexFloorService;
 
     /**
      * 获取首页banner图，前5条
      * @return
      */
+
     @GetMapping("indexBanner")
     public R indexBanner(){
         try {
@@ -65,6 +67,17 @@ public class IndexApiController {
     }
 
 
-
-
+    @GetMapping("indexFloor")
+    public R indexFloor(){
+        try {
+            List<IndexFloorVo> indexFloorVos = indexFloorService.selectFloorToFour();
+            for (IndexFloorVo indexFloorVo : indexFloorVos) {
+                System.out.println(indexFloorVo);
+            }
+            return R.ok().put("indexFloorList", indexFloorVos);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error();
+        }
+    }
 }

@@ -24,6 +24,9 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+page {
+  background-color: #ffffcc;
+}
 .userInfo {
   text-align: center;
   left: 0;
@@ -40,6 +43,7 @@
 .xiang {
   width: 200rpx;
   height: 200rpx;
+  border-radius: 50%;
 }
 .name .mobile {
   position: fixed;

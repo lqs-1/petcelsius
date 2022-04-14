@@ -1,8 +1,11 @@
 from django.contrib import admin
-from apps.userBack.models import User, IndexBanner, IndexNavigate
+from apps.userBack.models import User, IndexBanner, IndexNavigate, IndexFloor, IndexFloorDetail, IndexFloorImage
 
 # Register your models here.
 
 admin.site.register(User)
 admin.site.register(IndexBanner)
 admin.site.register(IndexNavigate)
+admin.site.register(IndexFloor)
+admin.site.register(IndexFloorImage)
+admin.site.register(IndexFloorDetail)
