@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker":1,"uni_modules/uni-file-picker/components/uni-file-picker/upload-file":1,"uni_modules/uni-file-picker/components/uni-file-picker/upload-image":1};
+/******/ 		var cssChunks = {"uni_modules/uni-fab/components/uni-fab/uni-fab":1,"uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker":1,"uni_modules/uni-icons/components/uni-icons/uni-icons":1,"uni_modules/uni-file-picker/components/uni-file-picker/upload-file":1,"uni_modules/uni-file-picker/components/uni-file-picker/upload-image":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker":"uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker","uni_modules/uni-file-picker/components/uni-file-picker/upload-file":"uni_modules/uni-file-picker/components/uni-file-picker/upload-file","uni_modules/uni-file-picker/components/uni-file-picker/upload-image":"uni_modules/uni-file-picker/components/uni-file-picker/upload-image"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"uni_modules/uni-fab/components/uni-fab/uni-fab":"uni_modules/uni-fab/components/uni-fab/uni-fab","uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker":"uni_modules/uni-file-picker/components/uni-file-picker/uni-file-picker","uni_modules/uni-icons/components/uni-icons/uni-icons":"uni_modules/uni-icons/components/uni-icons/uni-icons","uni_modules/uni-file-picker/components/uni-file-picker/upload-file":"uni_modules/uni-file-picker/components/uni-file-picker/upload-file","uni_modules/uni-file-picker/components/uni-file-picker/upload-image":"uni_modules/uni-file-picker/components/uni-file-picker/upload-image"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

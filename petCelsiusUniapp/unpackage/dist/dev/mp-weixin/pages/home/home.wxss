@@ -40,7 +40,6 @@ swiper image {
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 30rpx 20rpx;
-  background-color: #ffffcc;
 }
 .nav-list .nav-item {
   margin: 30rpx;

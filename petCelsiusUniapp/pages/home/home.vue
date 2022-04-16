@@ -152,7 +152,7 @@
 		flex-wrap: wrap;   
 		justify-content: space-around;
 		margin: 30rpx 20rpx;
-		background-color: #ffffcc;
+		// background-color: #ffffcc;
 		.nav-item{
 			margin: 30rpx;
 			text-align: center;
