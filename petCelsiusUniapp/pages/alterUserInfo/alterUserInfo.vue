@@ -1,8 +1,9 @@
 <template>
 	<view class="userInfo">	
 		<view class="topicAdd">
-			<text style="font-size: 30rpx;">头像:</text>
+			<view class="topic_title">头像:</view>
 			<uni-file-picker
+				class="topic"
 				:v-model="imageValue" 
 				fileMediatype="image" 
 				mode="list" 
@@ -13,10 +14,10 @@
 			/>
 		</view>
 		<view class="name">
-			<text style="font-size: 30rpx;">用户名:</text><input type="text"  v-model="user.username" style="background-color: #8F939C;"/>
+			<text class="username">用户名:</text><input type="text"  v-model="user.username" class="userInput"/>
 		</view>
 		<view>
-			<button type="primary" style="height: 80rpx; width: 200rpx; text-align: center; top: 30rpx;" @click="commit">提交</button>
+			<button type="primary" class="submit" @click="commit">提交</button>
 		</view>
 		
 	</view>
@@ -37,7 +38,7 @@
 			
 			this.user = uni.getStorageSync("user")
 			this.user.topic = null
-			console.log(this.user)
+			// console.log(this.user)
 			
 			
 		}
@@ -46,12 +47,11 @@
 		methods:{
 			// 获取上传状态
 			async select(res){
-				console.log('选择文件：',res.tempFilePaths)
 				 await this.uploadImg(res.tempFilePaths,1);
 			},
 			
 			async uploadImg(tempFilePaths, token) {
-			    console.log(token)
+			    // console.log(token)
 			    if (!tempFilePaths.length) return;
 			    const path = tempFilePaths.pop();
 			    const response = await uni.uploadFile({
@@ -63,7 +63,7 @@
 			            "Content-Type": "multipart/form-data",
 			        }
 			    });
-			    console.log(response)
+			    // console.log(response)
 			   
 				if (response[1].statusCode !== 200){
 					uni.$showMsg("上传头像失败")
@@ -71,7 +71,7 @@
 				uni.$showMsg("上传头像成功")
 				// console.log(response[1].data)
 				this.imageUrl = response[1].data
-				console.log("imageUrl:", this.imageUrl)
+				// console.log("imageUrl:", this.imageUrl)
 				
 			},
 			
@@ -81,7 +81,7 @@
 				}
 				let response = await uni.$http.post("userApi/alterUserInfo", this.user)
 				
-				console.log(response)
+				// console.log(response)
 				
 				if (response.data.code !== 0){
 					uni.$showMsg("修改失败")
@@ -100,45 +100,55 @@
 
 <style lang="scss">
 	
-	.name .topicAdd{
-		display: flex;	
-		// justify-content: center;
+	page{
+		background-color: #F2F3F4
 	}
-	
 	
 	.userInfo{
-		text-align: center;
-		left: 0;
-		right: 0;
-		position: fixed;
-		top: 500rpx;
-		font-weight: 400;
+		.topicAdd{
+			display: flex;
+			flex-wrap: nowrap;
+			background-color: #FFFFFF;
+			margin: 20rpx 0;
+			width: 100%;
+			height: auto;
+			
+			.topic_title{
+				margin-top: 20rpx;
+				width: 120rpx;
+				height: auto;
+				align-content: center;
+			}
+			.topic{
+				margin-top: 20rpx;
+			}
+		}
+		
+		.name{
+			display: flex;
+			flex-wrap: nowrap;
+			background-color: #FFFFFF;
+			margin: 20rpx 0;
+			width: 100%;
+			height: 80rpx;
+			
+			.username{
+				margin-top: 20rpx;
+				width: 120rpx;
+				height: auto;
+				align-content: center;
+			}
+			.userInput{
+				margin-top: 20rpx;
+			}
+		}
 	}
 	
-	.example-body {
-		padding: 10px;
-		padding-top: 0;
+	// height: 80rpx; width: 200rpx; text-align: center; top: 30rpx;
+	.submit{
+		height: 80rpx;
+		width: 200rpx;
+		text-align: center;
+		top: 500rpx;
 	}
-
-	.custom-image-box {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.text {
-		font-size: 14px;
-		color: #333;
-	}
-	// .topicAdd{
-	// 	text-align: center;
-	// 	left: 0;
-	// 	right: 0;
-	// 	position: fixed;
-	// 	top: 500rpx;
-	// 	font-weight: 400;
-	// }
 </style>

@@ -1,1 +1,1 @@
-<view></view>
+<view class="content"><block wx:for="{{cooperateList}}" wx:for-item="item" wx:for-index="index" wx:key="id"><view class="content-item"><image src="{{item.logo}}" mode="widthFix"></image><view><view>{{"机构名称:  "+item.title}}</view><view>{{"地      址:  "+item.address}}</view><view>{{"联系电话:  "+item.contact}}</view></view></view></block></view>

@@ -49,21 +49,34 @@
 				  -->
 				<swiper-item>
 					<scroll-view scroll-y="true" class="swiper-scroll">
-						<view class="swiper-item">{{item}}</view>
+						<!-- <view class="swiper-item">{{item}}</view> -->
+						<block v-for="(item1,index1) in heartList" :key="index1">
+							<view v-if="item == item1.title"  class="swiper-view" @click="pushDetail(item1)">
+								<image :src="item1.topic" class="swiper-img" mode="widthFix"></image>
+								<view class="swiper-text">
+									<view>
+										{{item1.username}}
+									</view>
+									<view>{{item1.petname}}</view>
+								</view>
+								<image src="../../static/icon/push.png" class="swiper-icon" mode="widthFix"></image>
+							</view>
+						</block>
 					</scroll-view>
 				</swiper-item>
 			</block>
 		</swiper>
 		<!-- 添加按钮，第三方插件，uniapp悬浮按钮 -->
-		<view>
+		<!-- <view>
 			<uni-fab
 				horizontal="right"
 				vertical="bottom"
-				direction="horizontal"
+				iconPath="../../static/tab_icons/my.png"
+				direction="horizontal"  
 				:popMenu="false"
 				@fabClick="fabClick"
 			/>
-			</view>
+			</view> -->
 	</view>
 </template>
 
@@ -75,7 +88,8 @@
 				currentTab: 0,
 				//再定义一个数组，存放数据
 				scrollViewList: ["宠物动态", "军犬风采"],
-				content:["添加动态"]
+				content:["添加动态"],
+				heartList:[],
 			}
 		},
 		onLoad() {
@@ -87,7 +101,14 @@
 					console.log('error')
 				}
 			})
+			
+			
 		},
+		
+		onShow() {
+			this.getHeartList()
+		},
+		
 		methods: {
 			// 切换swiper时，改变scroll的函数
 			changeScroll: function(e) {
@@ -101,12 +122,28 @@
 				} else {
 					this.currentTab = index;
 				}
+			},
+			// 获取缅怀信息列表
+			async getHeartList(){
+				let response = await uni.$http.get("heartApi/heartList")
+				
+				// console.log(response.data.heartList)
+				this.heartList = response.data.heartList
+			},
+			
+			// 点击每一项的函数
+			pushDetail(item1){
+				if(item1.title){
+					console.log("haha")
+				}else{
+					console.log("no")
+				}
 			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 	page {
 		width: 100%;
 		height: 90%;
@@ -142,5 +179,30 @@
 
 	.swiper-scroll {
 		height: 100%;
+		background-color: #F2F3F4;
+	}
+	.swiper-view{
+		display: flex;
+		flex-wrap: nowrap;
+		background-color: #FFFFFF;
+		margin: 20rpx 0;
+		
+		.swiper-img{
+			border-radius: 50%;
+			margin: 20rpx 20rpx;
+			width: 100rpx;
+		}
+		
+		.swiper-text{
+			margin: 20rpx 20rpx;
+			text-align: left;
+			width: 500rpx;
+			height: auto;
+		}
+		
+		.swiper-icon{
+			margin-top: 40rpx;
+			width: 50rpx;
+		}
 	}
 </style>

@@ -25,29 +25,67 @@
 /* 透明度 */
 /* 文章场景相关 */
 page {
-  background-color: #ffffcc;
+  background-color: #F2F3F4;
 }
-.userInfo {
-  text-align: center;
-  left: 0;
-  right: 0;
-  position: fixed;
-  top: 500rpx;
-  font-weight: 400;
+.not_login {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #FFFFFF;
+  margin: 20rpx 0;
 }
-.tou {
-  position: fixed;
-  top: 200rpx;
-  left: 270rpx;
+.not_login view {
+  margin: 20rpx 20rpx;
+  text-align: left;
+  width: 650rpx;
+  height: auto;
 }
-.xiang {
-  width: 200rpx;
-  height: 200rpx;
+.not_login image {
+  margin-top: 15rpx;
+  width: 50rpx;
+}
+.logined {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #FFFFFF;
+  margin: 20rpx 0;
+}
+.logined image {
   border-radius: 50%;
+  margin: 20rpx 20rpx;
+  width: 100rpx;
 }
-.name .mobile {
-  position: fixed;
-  top: 450rpx;
-  left: 270rpx;
+.logined .alter-content {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #FFFFFF;
+}
+.logined .alter-content view {
+  margin: 20rpx 20rpx;
+  text-align: left;
+  width: 630rpx;
+  height: auto;
+}
+.logined .alter-content image {
+  width: 50rpx;
+}
+.logined .logout-content {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: #FFFFFF;
+}
+.logined .logout-content view {
+  margin: 20rpx 20rpx;
+  text-align: left;
+  width: 630rpx;
+  height: auto;
+}
+.logined .logout-content image {
+  width: 50rpx;
+}
+.logined .content {
+  margin: 20rpx 20rpx;
+  text-align: left;
+  width: 500rpx;
+  height: auto;
 }
 

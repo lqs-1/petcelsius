@@ -1,29 +1,38 @@
 <template>
 	<view class="content">
 		
-		<view v-if="user == ''">
-			<button type="primary" style="top: 500rpx; width: 200rpx;" @click="tologin">去登陆</button>
+		<!-- 未登录 -->
+		<view v-if="user == ''" class="not_login" @click="tologin">
+			<!-- <button type="primary" style="top: 500rpx; width: 200rpx;" @click="tologin">去登陆</button> -->
+			<view>未登录</view>
+			<image src="../../static/icon/push.png" mode="widthFix" ></image>
 		</view>
 		
-		<view v-else  class="userInfo" style="">
-			<view class="tou">
-				<image :src="user.topic" class="xiang"></image>
+		<!-- 已经登录 -->
+		<view v-else  class="userInfo">
+			<view class="logined">
+				<image :src="user.topic" mode="widthFix"></image>
+				<view class="content">
+						<view>
+							{{user.username}}
+						</view>
+						<view >
+							{{user.mobile}}
+						</view>
+				</view>
 			</view>
-			
-			<view class="name">
-				<text style="font-size: 40rpx;">用户:{{user.username}}</text>
+			<view class="logined">
+				<view class="alter-content" @click="toalter">
+					<view>修改用户</view>
+					<image src="../../static/icon/push.png" mode="widthFix" ></image>
+				</view>
 			</view>
-			
-			<view class="mobile">
-				<text style="font-size: 40rpx;">账号:{{user.mobile}}</text>		
+			<view class="logined">
+				<view class="logout-content" @click="logout">
+					<view>退出登录</view>
+					<image src="../../static/icon/push.png" mode="widthFix" ></image>
+				</view>
 			</view>
-			<view>
-				<button type="primary" style="height: 80rpx; width: 200rpx; text-align: center; top: 30rpx;" @click="toalter">修改</button>
-			</view>
-			<view>
-				<button type="primary" style="height: 80rpx; width: 200rpx; text-align: center; top: 30rpx;" @click="logout">退出登录</button>
-			</view>
-			
 		</view>
 		
 		
@@ -60,7 +69,7 @@
 			// 检测是否登录
 			checkUser(){
 				this.user = uni.getStorageSync("user")
-				
+				// console.log(this.user)
 			},
 			
 			// 跳转登录页面
@@ -92,33 +101,76 @@
 
 <style lang="scss">
 	page{
-		background-color: #ffffcc
+		background-color: #F2F3F4
 	}
 	
 	.userInfo{
-		text-align: center;
-		left: 0;
-		right: 0;
-		position: fixed;
-		top: 500rpx;
-		font-weight: 400;
+		
 	}
 
+	.not_login{
+		display: flex;
+		flex-wrap: nowrap;
+		background-color: #FFFFFF;
+		margin: 20rpx 0;
+		view{
+			margin: 20rpx 20rpx;
+			text-align: left;
+			width: 650rpx;
+			height: auto;
+		}
+		image{
+			margin-top: 15rpx;
+			width: 50rpx;
+		}
+	}
 	
-	.tou{
-		position: fixed;
-		top: 200rpx;
-		left: 270rpx;
-	}
-	.xiang{
-		width: 200rpx;
-		height: 200rpx;
-		border-radius: 50%;
-	}
-	.name .mobile{
-		position: fixed;
-		top: 450rpx;
-		left: 270rpx;
+	.logined{
+		display: flex;
+		flex-wrap: nowrap;
+		background-color: #FFFFFF;
+		margin: 20rpx 0;
+		image{
+			border-radius: 50%;
+			margin: 20rpx 20rpx;
+			width: 100rpx;
+		}
+		.alter-content{
+			display: flex;
+			flex-wrap: nowrap;
+			background-color: #FFFFFF;
+			view{
+				margin: 20rpx 20rpx;
+				text-align: left;
+				width: 630rpx;
+				height: auto;
+			}
+			image{
+				width: 50rpx;
+			}
+		}
+		
+		.logout-content{
+			display: flex;
+			flex-wrap: nowrap;
+			background-color: #FFFFFF;
+			view{
+				margin: 20rpx 20rpx;
+				text-align: left;
+				width: 630rpx;
+				height: auto;
+			}
+			image{
+				width: 50rpx;
+			}
+		}
+		
+		.content{
+			margin: 20rpx 20rpx;
+			text-align: left;
+			width: 500rpx;
+			height: auto;
+		}
 	}
 	
 

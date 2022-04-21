@@ -105,3 +105,84 @@ class IndexFloorDetail(BaseDB, models.Model):
 
     def __str__(self):
         return self.name
+
+
+# 宠物信息
+class PetInfo(BaseDB, models.Model):
+    pass
+
+
+# 缅怀页缅怀列表
+class HeartInfo(BaseDB, models.Model):
+
+    TITLE_CHOICES = (
+        ('宠物动态', '宠物动态'),
+        ('军犬风采', '军犬风采'),
+    )
+
+    user = models.ForeignKey("User", verbose_name="用户id", on_delete=models.CASCADE)
+    title = models.CharField(max_length=30, verbose_name="标题", choices=TITLE_CHOICES, default="宠物动态")
+    name = models.CharField(max_length=20, verbose_name="宠物名称", null=False)
+    age = models.IntegerField(verbose_name="宠物年龄", null=False)
+    color = models.CharField(max_length=20, verbose_name="宠物颜色", null=False)
+    desc = models.TextField(verbose_name="宠物描述", null=True)
+    detail = models.OneToOneField("HeartDetail", verbose_name="缅怀详情", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "heart_info"
+        verbose_name = "缅怀基本信息"
+        verbose_name_plural = verbose_name
+
+
+# 缅怀详情
+class HeartDetail(BaseDB, models.Model):
+
+    name = models.CharField(max_length=30, verbose_name="占位", null=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "heart_detail"
+        verbose_name = "缅怀详情"
+        verbose_name_plural = verbose_name
+
+
+# 缅怀详情图片
+class HearDetailImage(BaseDB, models.Model):
+    pass
+
+
+# 合作机构（一般都是宠物医院和宠物店）
+class PetCooperateInfo(BaseDB, models.Model):
+
+    title = models.CharField(max_length=30, null=False, verbose_name="机构名称")
+    logo = models.ImageField(null=False, verbose_name="机构logo")
+    contact = models.CharField(max_length=20, verbose_name="联系电话")
+    address = models.CharField(null=False, max_length=50, verbose_name="机构地址")
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = "cooperate_info"
+        verbose_name = "合作机构信息"
+        verbose_name_plural = verbose_name
+
+
+# 合作机构详情
+class PetCooperateDetail(BaseDB, models.Model):
+
+    petCooperate = models.OneToOneField("PetCooperateInfo", verbose_name="所属机构", on_delete=models.CASCADE)
+    name = models.CharField(max_length=30, verbose_name="占位", null=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "cooperate_detail"
+        verbose_name = "合作机构详情"
+        verbose_name_plural = verbose_name
