@@ -6,4 +6,7 @@
     <!-- SQL语句 -->
 
 
+    <select id="selectAll" resultType="com.petcelsius.api.domain.CooperateInfo">
+            select * from cooperate_info
+    </select>
 </mapper>

@@ -164,6 +164,15 @@ var _default =
                   uni.$http.get("cooperateApi/cooperateList"));case 2:response = _context.sent;
                 // console.log(response.data.cooperateList)
                 _this.cooperateList = response.data.cooperateList;case 4:case "end":return _context.stop();}}}, _callee);}))();
+    },
+
+    // 跳转合作机构详情页面
+    pushDetail: function pushDetail(item) {
+      console.log(item);
+      uni.navigateTo({
+        // 传递对象到其他页面。首先要编码
+        url: "../../subpkg/cooperate/cooperateDetial/cooperateDetial?item=" + encodeURIComponent(JSON.stringify(item)) });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

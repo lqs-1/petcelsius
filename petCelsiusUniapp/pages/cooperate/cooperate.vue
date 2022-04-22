@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<view class="content-item" v-for="(item, index) in cooperateList" :key="item.id">
+		<view class="content-item" v-for="(item, index) in cooperateList" :key="item.id" @click="pushDetail(item)">
 			<image :src="item.logo" mode="widthFix"></image>
 			<view>
 				<view>机构名称:&nbsp;&nbsp;{{item.title}}</view>
@@ -32,6 +32,15 @@
 				let response = await uni.$http.get("cooperateApi/cooperateList")
 				// console.log(response.data.cooperateList)
 				this.cooperateList = response.data.cooperateList
+			},
+			
+			// 跳转合作机构详情页面
+			pushDetail(item){
+				console.log(item)
+				uni.navigateTo({
+					// 传递对象到其他页面。首先要编码
+					url:"../../subpkg/cooperate/cooperateDetial/cooperateDetial?item=" + encodeURIComponent(JSON.stringify(item))
+				})
 			}
 		}
 	}

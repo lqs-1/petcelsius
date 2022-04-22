@@ -1,1 +1,1 @@
-<view>纪念物品</view>
+<view>{{''+navigate.title+''}}</view>

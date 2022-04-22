@@ -92,7 +92,7 @@
 			// 获取首页floor列表
 			async getFloorList(){
 				let response = await uni.$http.get("indexApi/indexFloor")
-				console.log(response.data.indexFloorList)
+				// console.log(response.data.indexFloorList)
 				this.flootList = response.data.indexFloorList
 			},
 			
@@ -107,20 +107,20 @@
 			},
 			// navigate点击跳转
 			navClickHandler(item){
+				// 给其他页面传递对象，并且编码传递
 				if (item.title == "现在预约"){
-					this.navigateTo("../../subpkg/book/booking/booking")
+					this.navigateTo("../../subpkg/book/booking/booking?navigate=" + encodeURIComponent(JSON.stringify(item)))
 				}else if (item.title == "预约记录"){
-					this.navigateTo("../../subpkg/book/bookingRecord/bookingRecord")
+					this.navigateTo("../../subpkg/book/bookingRecord/bookingRecord?navigate=" + encodeURIComponent(JSON.stringify(item)))
 				}else if(item.title == "宠物专车"){
-					this.navigateTo("../../subpkg/petNavigate/petCar/petCar")
+					this.navigateTo("../../subpkg/petNavigate/petCar/petCar?navigate=" + encodeURIComponent(JSON.stringify(item)))
 				}else if(item.title == "仪容整理"){
-					this.navigateTo("../../subpkg/petNavigate/grooming/grooming")
+					this.navigateTo("../../subpkg/petNavigate/grooming/grooming?navigate=" + encodeURIComponent(JSON.stringify(item)))
 				}else if(item.title == "告别仪式"){
-					this.navigateTo("../../subpkg/petNavigate/farewell/farewell")
+					this.navigateTo("../../subpkg/petNavigate/farewell/farewell?navigate=" + encodeURIComponent(JSON.stringify(item)))
 				}else{
-					this.navigateTo("../../subpkg/petNavigate/souvenir/souvenir")
+					this.navigateTo("../../subpkg/petNavigate/souvenir/souvenir?navigate=" + encodeURIComponent(JSON.stringify(item)))
 				}
-				console.log(item.title)
 				
 			}
 		}

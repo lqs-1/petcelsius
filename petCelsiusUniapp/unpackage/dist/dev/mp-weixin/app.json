@@ -23,6 +23,18 @@
         "farewell/farewell",
         "souvenir/souvenir"
       ]
+    },
+    {
+      "root": "subpkg/cooperate",
+      "pages": [
+        "cooperateDetial/cooperateDetial"
+      ]
+    },
+    {
+      "root": "subpkg/heart",
+      "pages": [
+        "heartDetial/heartDetial"
+      ]
     }
   ],
   "window": {
@@ -61,6 +73,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

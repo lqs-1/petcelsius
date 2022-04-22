@@ -18,7 +18,7 @@ public class CooperateInfoServiceImpl extends ServiceImpl<CooperateInfoMapper, C
 
     @Override
     public List<CooperateInfo> selectAll() {
-        List<CooperateInfo> cooperateInfos = this.baseMapper.selectList(null);
+        List<CooperateInfo> cooperateInfos = this.baseMapper.selectAll();
         List<CooperateInfo> cooperateInfoList = cooperateInfos.stream().map(item -> {
             String logo = item.getLogo();
             String realLogo = ossBaseUrl + logo;

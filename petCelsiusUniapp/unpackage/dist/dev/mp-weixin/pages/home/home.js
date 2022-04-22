@@ -224,8 +224,8 @@ var _default =
     // 获取首页floor列表
     getFloorList: function getFloorList() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var response;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
                   uni.$http.get("indexApi/indexFloor"));case 2:response = _context3.sent;
-                console.log(response.data.indexFloorList);
-                _this3.flootList = response.data.indexFloorList;case 5:case "end":return _context3.stop();}}}, _callee3);}))();
+                // console.log(response.data.indexFloorList)
+                _this3.flootList = response.data.indexFloorList;case 4:case "end":return _context3.stop();}}}, _callee3);}))();
     },
 
 
@@ -239,20 +239,20 @@ var _default =
     },
     // navigate点击跳转
     navClickHandler: function navClickHandler(item) {
+      // 给其他页面传递对象，并且编码传递
       if (item.title == "现在预约") {
-        this.navigateTo("../../subpkg/book/booking/booking");
+        this.navigateTo("../../subpkg/book/booking/booking?navigate=" + encodeURIComponent(JSON.stringify(item)));
       } else if (item.title == "预约记录") {
-        this.navigateTo("../../subpkg/book/bookingRecord/bookingRecord");
+        this.navigateTo("../../subpkg/book/bookingRecord/bookingRecord?navigate=" + encodeURIComponent(JSON.stringify(item)));
       } else if (item.title == "宠物专车") {
-        this.navigateTo("../../subpkg/petNavigate/petCar/petCar");
+        this.navigateTo("../../subpkg/petNavigate/petCar/petCar?navigate=" + encodeURIComponent(JSON.stringify(item)));
       } else if (item.title == "仪容整理") {
-        this.navigateTo("../../subpkg/petNavigate/grooming/grooming");
+        this.navigateTo("../../subpkg/petNavigate/grooming/grooming?navigate=" + encodeURIComponent(JSON.stringify(item)));
       } else if (item.title == "告别仪式") {
-        this.navigateTo("../../subpkg/petNavigate/farewell/farewell");
+        this.navigateTo("../../subpkg/petNavigate/farewell/farewell?navigate=" + encodeURIComponent(JSON.stringify(item)));
       } else {
-        this.navigateTo("../../subpkg/petNavigate/souvenir/souvenir");
+        this.navigateTo("../../subpkg/petNavigate/souvenir/souvenir?navigate=" + encodeURIComponent(JSON.stringify(item)));
       }
-      console.log(item.title);
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

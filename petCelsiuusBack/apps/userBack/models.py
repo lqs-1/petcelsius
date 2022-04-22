@@ -163,6 +163,7 @@ class PetCooperateInfo(BaseDB, models.Model):
     logo = models.ImageField(null=False, verbose_name="机构logo")
     contact = models.CharField(max_length=20, verbose_name="联系电话")
     address = models.CharField(null=False, max_length=50, verbose_name="机构地址")
+    desc = models.TextField(null=False, verbose_name="机构详情描述")
 
     def __str__(self):
         return self.title
@@ -173,16 +174,16 @@ class PetCooperateInfo(BaseDB, models.Model):
         verbose_name_plural = verbose_name
 
 
-# 合作机构详情
-class PetCooperateDetail(BaseDB, models.Model):
+# 合作机构详情图片
+class PetCooperateDescImg(BaseDB, models.Model):
 
-    petCooperate = models.OneToOneField("PetCooperateInfo", verbose_name="所属机构", on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, verbose_name="占位", null=False)
+    cooperate = models.ForeignKey("PetCooperateInfo", verbose_name="所属机构", on_delete=models.CASCADE)
+    desc_img = models.ImageField(null=False, verbose_name="机构外貌")
 
     def __str__(self):
-        return self.name
+        return self.cooperate.title
 
     class Meta:
-        db_table = "cooperate_detail"
-        verbose_name = "合作机构详情"
+        db_table = "cooperate_desc_img"
+        verbose_name = "合作机构详情图片"
         verbose_name_plural = verbose_name

@@ -16,4 +16,5 @@ public class CooperateInfo implements Serializable {
     private String logo;
     private String contact;
     private String address;
+    private String desc;
 }

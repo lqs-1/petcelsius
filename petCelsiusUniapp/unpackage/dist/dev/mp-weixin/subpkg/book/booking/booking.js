@@ -24,7 +24,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -33,29 +33,17 @@ __webpack_require__.r(__webpack_exports__);
 var _default =
 {
   data: function data() {
-    return {};
-
+    return {
+      navigate: "" };
 
   },
 
-  onLoad: function onLoad() {
-    var res = uni.getSystemInfoSync();
-    this.windowHeight = res.windowHeight;
-  },
-  onReady: function onReady() {
-    this.context = uni.createLivePusherContext('livePusher', this);
-    this.startPreview();
-  },
-  methods: {
-    // 开启预览
-    startPreview: function startPreview() {
-      this.context.startPreview({
-        success: function success(e) {
-          console.log(e);
-        } });
-
-    } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+  onLoad: function onLoad(data) {
+    // 获取其他页面传递过来的对象，并解码
+    var navigate = JSON.parse(decodeURIComponent(data.navigate));
+    this.navigate = navigate;
+    console.log(navigate);
+  } };exports.default = _default;
 
 /***/ }),
 

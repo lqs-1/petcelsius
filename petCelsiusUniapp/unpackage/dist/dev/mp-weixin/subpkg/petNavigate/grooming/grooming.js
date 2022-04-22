@@ -134,12 +134,46 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      navigate: "" };
 
+  },
 
+  onLoad: function onLoad(data) {
+    // 获取其他页面传递过来的对象，并解码
+    var navigate = JSON.parse(decodeURIComponent(data.navigate));
+    this.navigate = navigate;
+    console.log(navigate);
   } };exports.default = _default;
 
 /***/ })

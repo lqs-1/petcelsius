@@ -142,7 +142,39 @@
                 
                 }
             ]
+		},
+		
+		{
+			// 合作机构相关子包，详情等等
+			"root":"subpkg/cooperate",
+			"pages":[{
+                    "path" : "cooperateDetial/cooperateDetial",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+			
+		},
+		{
+			// 缅怀详情页面
+			"root":"subpkg/heart",
+			"pages":[{
+                    "path" : "heartDetial/heartDetial",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 		}
+		
+		
 	],
 	
 	// 定义全局样式，主要配置窗口和背景的样式

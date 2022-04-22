@@ -1,6 +1,6 @@
 <template>
 	<view>
-		马上预定
+		{{navigate.title}}
 	</view>
 </template>
 
@@ -8,28 +8,17 @@
 	export default {
 		data() {
 			return {
-				
+				navigate:""
 			};
 		},
 		
-				onLoad() {
-					let res = uni.getSystemInfoSync()
-					this.windowHeight = res.windowHeight
-				},
-				onReady() {
-					this.context = uni.createLivePusherContext('livePusher', this)
-					this.startPreview()
-				},
-				methods: {
-					// 开启预览
-					startPreview(){
-						this.context.startPreview({
-							success:(e)=>{
-								console.log(e);
-							}
-						})
-					},
-					}
+		onLoad(data) {
+			// 获取其他页面传递过来的对象，并解码
+			let navigate = JSON.parse(decodeURIComponent(data.navigate))
+			this.navigate = navigate
+			console.log(navigate)
+		}		
+		
 	}
 </script>
 

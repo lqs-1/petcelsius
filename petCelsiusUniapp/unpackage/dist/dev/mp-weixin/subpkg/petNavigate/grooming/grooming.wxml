@@ -1,1 +1,1 @@
-<view>仪容整理</view>
+<view>{{''+navigate.title+''}}</view>

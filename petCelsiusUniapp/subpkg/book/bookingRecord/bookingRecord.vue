@@ -1,6 +1,6 @@
 <template>
 	<view>
-		预定记录
+		{{navigate.title}}
 	</view>
 </template>
 
@@ -8,9 +8,17 @@
 	export default {
 		data() {
 			return {
-				
+				navigate:""
 			};
-		}
+		},
+		
+		onLoad(data) {
+			// 获取其他页面传递过来的对象，并解码
+			let navigate = JSON.parse(decodeURIComponent(data.navigate))
+			this.navigate = navigate
+			console.log(navigate)
+		}		
+		
 	}
 </script>
 

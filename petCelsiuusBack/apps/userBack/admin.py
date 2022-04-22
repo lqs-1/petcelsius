@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.userBack.models import User, IndexBanner, IndexNavigate, IndexFloor, IndexFloorDetail, IndexFloorImage, HeartDetail, HeartInfo, PetCooperateInfo, PetCooperateDetail
+from apps.userBack.models import User, IndexBanner, IndexNavigate, IndexFloor, IndexFloorDetail, IndexFloorImage, HeartDetail, HeartInfo, PetCooperateInfo, PetCooperateDescImg
 
 # Register your models here.
 
@@ -12,5 +12,5 @@ admin.site.register(IndexFloorDetail)
 admin.site.register(HeartDetail)
 admin.site.register(HeartInfo)
 admin.site.register(PetCooperateInfo)
-admin.site.register(PetCooperateDetail)
+admin.site.register(PetCooperateDescImg)
 

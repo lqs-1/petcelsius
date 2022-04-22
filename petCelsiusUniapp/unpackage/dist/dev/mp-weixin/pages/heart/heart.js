@@ -265,11 +265,11 @@ var _default =
 
     // 点击每一项的函数
     pushDetail: function pushDetail(item1) {
-      if (item1.title) {
-        console.log("haha");
-      } else {
-        console.log("no");
-      }
+      uni.navigateTo({
+        // 传递对象到其他页面，并且编码
+        url: "../../subpkg/heart/heartDetial/heartDetial?item=" + encodeURIComponent(JSON.stringify(item1)) });
+
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

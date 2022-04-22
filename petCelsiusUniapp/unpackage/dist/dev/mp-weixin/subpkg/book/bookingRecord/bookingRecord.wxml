@@ -1,1 +1,1 @@
-<view>预定记录</view>
+<view>{{''+navigate.title+''}}</view>
