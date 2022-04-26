@@ -1,1 +1,1 @@
-<view>{{''+heartInfo.petname+''}}</view>
+<view><block wx:if="{{heartDetailImageList.length>0}}"><block><swiper indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" duration="{{1000}}" circular="true"><block wx:for="{{heartDetailImageList}}" wx:for-item="item" wx:for-index="i" wx:key="id"><swiper-item><navigator class="swiper-item"><image src="{{item.img}}"></image></navigator></swiper-item></block></swiper></block></block><view class="desc">{{''+heartInfo.desc+''}}</view></view>

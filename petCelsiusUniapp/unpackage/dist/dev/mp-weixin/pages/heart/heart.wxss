@@ -35,6 +35,7 @@ page {
 }
 .scroll-view {
   /* position: fixed; */
+  margin: 20rpx 20rpx;
   width: 100%;
   text-align: center;
   white-space: nowrap;
@@ -56,24 +57,19 @@ page {
   background-color: #F2F3F4;
 }
 .swiper-view {
-  display: flex;
-  flex-wrap: nowrap;
+  display: inline;
+  float: left;
+  border-radius: 5%;
+  width: 47%;
   background-color: #FFFFFF;
-  margin: 20rpx 0;
+  margin: 20rpx 10rpx;
 }
 .swiper-view .swiper-img {
-  border-radius: 50%;
-  margin: 20rpx 20rpx;
-  width: 100rpx;
+  border-radius: 5%;
+  width: 100%;
 }
-.swiper-view .swiper-text {
-  margin: 20rpx 20rpx;
+.swiper-view view {
   text-align: left;
-  width: 500rpx;
-  height: auto;
-}
-.swiper-view .swiper-icon {
-  margin-top: 40rpx;
-  width: 50rpx;
+  font-size: 20rpx;
 }
 

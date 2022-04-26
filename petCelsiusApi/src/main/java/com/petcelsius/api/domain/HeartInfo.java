@@ -19,4 +19,5 @@ public class HeartInfo implements Serializable {
     private String desc;
     private Long user_id;
     private Long detail_id;
+    private String pet_topic;
 }

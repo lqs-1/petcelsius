@@ -212,16 +212,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
       //定义swiper的初始值为0，也就是第一页
       currentTab: 0,
-      //再定义一个数组，存放数据
-      scrollViewList: ["宠物动态", "军犬风采"],
-      content: ["添加动态"],
-      heartList: [] };
+      //存放scrollview项
+      heartLogoList: [],
+      heartList: [],
+      user: "" };
 
   },
   onLoad: function onLoad() {var _this = this;
@@ -238,10 +245,22 @@ var _default =
   },
 
   onShow: function onShow() {
+    this.getUser();
+    // console.log(this.user)
+    this.getHeartLogoList();
     this.getHeartList();
   },
 
   methods: {
+    // 获取用户信息
+    // 检测是否登录
+    getUser: function getUser() {
+      this.user = uni.getStorageSync("user");
+      // console.log(this.user)
+    },
+
+
+
     // 切换swiper时，改变scroll的函数
     changeScroll: function changeScroll(e) {
       // 令data中定义的currentTab等于当前swiper的current的值，来改变scroll
@@ -255,12 +274,22 @@ var _default =
         this.currentTab = index;
       }
     },
+
+
+    // 获取缅怀标题对应的logo用于scroll显示
+    getHeartLogoList: function getHeartLogoList() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var response;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  uni.$http.get("heartApi/heartLogoList"));case 2:response = _context.sent;
+                // console.log(response.data.heartLogoList)
+                _this2.heartLogoList = response.data.heartLogoList;case 4:case "end":return _context.stop();}}}, _callee);}))();
+    },
+
+
     // 获取缅怀信息列表
-    getHeartList: function getHeartList() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var response;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  uni.$http.get("heartApi/heartList"));case 2:response = _context.sent;
+    getHeartList: function getHeartList() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var response;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                  uni.$http.get("heartApi/heartList"));case 2:response = _context2.sent;
 
                 // console.log(response.data.heartList)
-                _this2.heartList = response.data.heartList;case 4:case "end":return _context.stop();}}}, _callee);}))();
+                _this3.heartList = response.data.heartList;case 4:case "end":return _context2.stop();}}}, _callee2);}))();
     },
 
     // 点击每一项的函数

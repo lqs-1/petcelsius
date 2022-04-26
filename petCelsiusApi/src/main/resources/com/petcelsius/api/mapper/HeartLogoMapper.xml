@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcelsius.api.mapper.HeartLogoMapper">
+    <!-- SQL语句 -->
+
+
+    <select id="selectByTitle" resultType="com.petcelsius.api.domain.HeartLogo">
+        select * from heart_logo where title=#{title}
+    </select>
+</mapper>

@@ -1,13 +1,17 @@
 package com.petcelsius.api.domain;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class HeartDetail implements Serializable {
+@Data
+public class HeartLogo implements Serializable {
     private Long id;
     private Date create_time;
     private Date alter_time;
     private Boolean del_mark;
 
-    private String name;
+    private String title;
+    private String logo;
 }

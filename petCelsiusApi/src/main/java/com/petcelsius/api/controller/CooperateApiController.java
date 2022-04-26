@@ -1,6 +1,5 @@
 package com.petcelsius.api.controller;
 
-import com.petcelsius.api.config.To;
 import com.petcelsius.api.domain.CooperateDescImg;
 import com.petcelsius.api.domain.CooperateInfo;
 import com.petcelsius.api.service.CooperateDescImgService;

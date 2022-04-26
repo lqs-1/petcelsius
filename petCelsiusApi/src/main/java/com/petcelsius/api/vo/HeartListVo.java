@@ -11,4 +11,7 @@ public class HeartListVo {
     private String username;
     private String petname;
     private String title;
+//    private String logo;
+    private String petTopic;
+    private String desc;
 }

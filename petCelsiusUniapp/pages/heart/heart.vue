@@ -10,10 +10,11 @@
 		<!-- 设置scroll-view的scroll-x="true"，为X轴滑动 -->
 		<scroll-view scroll-x="true" class="scroll-view">
 			<!-- 子元素选择用v-for进行循环遍历，因为后面要用到index -->
-			<view class="body-view" v-for="(item,index) in scrollViewList" :key="index" @click="changeSwiper(index)">
+			<view class="body-view" v-for="(item,index) in heartLogoList" :key="index" @click="changeSwiper(index)">
 				<!-- 这里是一个小提醒点，动态绑定class的值，一个三元表达式 -->
 				<view :class="[currentTab==index ? 'menu-one-act' : 'menu-one']">
-					{{item}}
+					<!-- <image :src="item.logo" style="width: 100rpx;" mode="widthFix"></image> -->
+					{{item.title}}
 				</view>
 			</view>
 		</scroll-view>
@@ -22,7 +23,7 @@
 		 -->
 		 
 		<swiper :indicator-dots="false" :autoplay="false" class="swiper" :current="currentTab" ref="swiper" @change="changeScroll">
-			<block v-for="(item,index) in scrollViewList" :key="index">
+			<block v-for="(item,index) in heartLogoList" :key="index">
 				<!-- 
 					pei:{
 						pei:{
@@ -51,15 +52,21 @@
 					<scroll-view scroll-y="true" class="swiper-scroll">
 						<!-- <view class="swiper-item">{{item}}</view> -->
 						<block v-for="(item1,index1) in heartList" :key="index1">
-							<view v-if="item == item1.title"  class="swiper-view" @click="pushDetail(item1)">
-								<image :src="item1.topic" class="swiper-img" mode="widthFix"></image>
-								<view class="swiper-text">
-									<view>
-										{{item1.username}}
-									</view>
-									<view>{{item1.petname}}</view>
-								</view>
-								<image src="../../static/icon/push.png" class="swiper-icon" mode="widthFix"></image>
+							<view v-if="item.title == item1.title"  class="swiper-view" @click="pushDetail(item1)">
+								<image :src="item1.petTopic" class="swiper-img" mode="widthFix"></image>
+								<!-- <view class="swiper-text"> -->
+									<view>用户: {{item1.username}}</view>
+									<view>宠物: {{item1.petname}}</view>
+								<!-- </view> -->
+								<!-- <image src="../../static/icon/push.png" class="swiper-icon" mode="widthFix"></image> -->
+							</view>
+							<view v-if="item.title == '个人的' && user.id == item1.userId"  class="swiper-view" @click="pushDetail(item1)">
+								<image :src="item1.petTopic" class="swiper-img" mode="widthFix"></image>
+								<!-- <view class="swiper-text"> -->
+									<view>用户: {{item1.username}}</view>
+									<view>宠物: {{item1.petname}}</view>
+								<!-- </view> -->
+								<!-- <image src="../../static/icon/push.png" class="swiper-icon" mode="widthFix"></image> -->
 							</view>
 						</block>
 					</scroll-view>
@@ -86,10 +93,10 @@
 			return {
 				//定义swiper的初始值为0，也就是第一页
 				currentTab: 0,
-				//再定义一个数组，存放数据
-				scrollViewList: ["宠物动态", "军犬风采"],
-				content:["添加动态"],
+				//存放scrollview项
+				heartLogoList: [],
 				heartList:[],
+				user:""
 			}
 		},
 		onLoad() {
@@ -101,15 +108,27 @@
 					console.log('error')
 				}
 			})
-			
+					
 			
 		},
 		
 		onShow() {
+			this.getUser()
+			// console.log(this.user)
+			this.getHeartLogoList()
 			this.getHeartList()
 		},
 		
 		methods: {
+			// 获取用户信息
+			// 检测是否登录
+			getUser(){
+				this.user = uni.getStorageSync("user")
+				// console.log(this.user)
+			},
+			
+			
+			
 			// 切换swiper时，改变scroll的函数
 			changeScroll: function(e) {
 				// 令data中定义的currentTab等于当前swiper的current的值，来改变scroll
@@ -123,6 +142,16 @@
 					this.currentTab = index;
 				}
 			},
+			
+			
+			// 获取缅怀标题对应的logo用于scroll显示
+			async getHeartLogoList(){
+				let response = await uni.$http.get("heartApi/heartLogoList")
+				// console.log(response.data.heartLogoList)
+				this.heartLogoList = response.data.heartLogoList
+			},
+			
+			
 			// 获取缅怀信息列表
 			async getHeartList(){
 				let response = await uni.$http.get("heartApi/heartList")
@@ -157,6 +186,7 @@
 
 	.scroll-view {
 		/* position: fixed; */
+		margin: 20rpx 20rpx;
 		width: 100%;
 		text-align: center;
 		white-space: nowrap;
@@ -182,27 +212,30 @@
 		background-color: #F2F3F4;
 	}
 	.swiper-view{
-		display: flex;
-		flex-wrap: nowrap;
+		display: inline;
+		float: left;
+		// display: flex;
+		// flex-wrap: nowrap;
+		// position: absolute;
+		border-radius: 5%;
+		width: 47%;
 		background-color: #FFFFFF;
-		margin: 20rpx 0;
+		margin: 20rpx 10rpx;
 		
 		.swiper-img{
-			border-radius: 50%;
-			margin: 20rpx 20rpx;
-			width: 100rpx;
+			border-radius: 5%;
+			// margin: 20rpx 20rpx;
+			width: 100%;
 		}
 		
-		.swiper-text{
-			margin: 20rpx 20rpx;
+		view{
 			text-align: left;
-			width: 500rpx;
-			height: auto;
+			font-size: 20rpx;
 		}
 		
-		.swiper-icon{
-			margin-top: 40rpx;
-			width: 50rpx;
-		}
+		// .swiper-icon{
+		// 	margin-top: 40rpx;
+		// 	width: 50rpx;
+		// }
 	}
 </style>

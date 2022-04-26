@@ -116,17 +116,18 @@ class PetInfo(BaseDB, models.Model):
 class HeartInfo(BaseDB, models.Model):
 
     TITLE_CHOICES = (
-        ('宠物动态', '宠物动态'),
-        ('军犬风采', '军犬风采'),
+        ('宠物狗', '宠物狗'),
+        ('宠物猫', '宠物猫'),
+        ('功勋犬', '功勋犬'),
     )
 
     user = models.ForeignKey("User", verbose_name="用户id", on_delete=models.CASCADE)
-    title = models.CharField(max_length=30, verbose_name="标题", choices=TITLE_CHOICES, default="宠物动态")
+    title = models.CharField(max_length=30, verbose_name="标题", choices=TITLE_CHOICES, default="宠物狗")
+    pet_topic = models.ImageField(max_length=101, verbose_name="宠物展示图片", null=False)
     name = models.CharField(max_length=20, verbose_name="宠物名称", null=False)
     age = models.IntegerField(verbose_name="宠物年龄", null=False)
     color = models.CharField(max_length=20, verbose_name="宠物颜色", null=False)
     desc = models.TextField(verbose_name="宠物描述", null=True)
-    detail = models.OneToOneField("HeartDetail", verbose_name="缅怀详情", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -137,23 +138,41 @@ class HeartInfo(BaseDB, models.Model):
         verbose_name_plural = verbose_name
 
 
-# 缅怀详情
-class HeartDetail(BaseDB, models.Model):
+# 缅怀展示logo(无标间关系)
+class HeartLogo(BaseDB, models.Model):
 
-    name = models.CharField(max_length=30, verbose_name="占位", null=False)
+    TITLE_CHOICES = (
+        ('宠物狗', '宠物狗'),
+        ('宠物猫', '宠物猫'),
+        ('功勋犬', '功勋犬'),
+        ('个人的', '个人的')
+    )
+
+    title = models.CharField(max_length=30, verbose_name="标题", choices=TITLE_CHOICES, default="宠物狗")
+    logo = models.ImageField(verbose_name="缅怀展示logo", null=False)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
-        db_table = "heart_detail"
-        verbose_name = "缅怀详情"
+        db_table = "heart_logo"
+        verbose_name = "缅怀logo"
         verbose_name_plural = verbose_name
 
 
 # 缅怀详情图片
-class HearDetailImage(BaseDB, models.Model):
-    pass
+class HeartDetailImage(BaseDB, models.Model):
+
+    heart = models.ForeignKey("HeartInfo", verbose_name="所属的缅怀详情", on_delete=models.CASCADE)
+    img = models.ImageField(null=False, verbose_name="描述图片")
+
+    def __str__(self):
+        return self.heart.name
+
+    class Meta:
+        db_table = "heart_detail_image"
+        verbose_name = "缅怀详情图片"
+        verbose_name_plural = verbose_name
 
 
 # 合作机构（一般都是宠物医院和宠物店）
@@ -187,3 +206,5 @@ class PetCooperateDescImg(BaseDB, models.Model):
         db_table = "cooperate_desc_img"
         verbose_name = "合作机构详情图片"
         verbose_name_plural = verbose_name
+
+
