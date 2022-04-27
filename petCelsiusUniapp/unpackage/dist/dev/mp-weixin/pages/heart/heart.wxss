@@ -57,6 +57,7 @@ page {
   background-color: #F2F3F4;
 }
 .swiper-view {
+  box-shadow: 8rpx 10rpx 8rpx rgba(0, 0, 0, 0.3);
   display: inline;
   float: left;
   border-radius: 5%;
@@ -69,6 +70,7 @@ page {
   width: 100%;
 }
 .swiper-view view {
+  margin-left: 10rpx;
   text-align: left;
   font-size: 20rpx;
 }

@@ -55,16 +55,16 @@
 							<view v-if="item.title == item1.title"  class="swiper-view" @click="pushDetail(item1)">
 								<image :src="item1.petTopic" class="swiper-img" mode="widthFix"></image>
 								<!-- <view class="swiper-text"> -->
-									<view>用户: {{item1.username}}</view>
 									<view>宠物: {{item1.petname}}</view>
+									<view>用户: {{item1.username}}</view>
 								<!-- </view> -->
 								<!-- <image src="../../static/icon/push.png" class="swiper-icon" mode="widthFix"></image> -->
 							</view>
 							<view v-if="item.title == '个人的' && user.id == item1.userId"  class="swiper-view" @click="pushDetail(item1)">
 								<image :src="item1.petTopic" class="swiper-img" mode="widthFix"></image>
 								<!-- <view class="swiper-text"> -->
-									<view>用户: {{item1.username}}</view>
 									<view>宠物: {{item1.petname}}</view>
+									<view>用户: {{item1.username}}</view>
 								<!-- </view> -->
 								<!-- <image src="../../static/icon/push.png" class="swiper-icon" mode="widthFix"></image> -->
 							</view>
@@ -212,6 +212,7 @@
 		background-color: #F2F3F4;
 	}
 	.swiper-view{
+		box-shadow: 8rpx 10rpx 8rpx rgba($color: #000000, $alpha: 0.3);
 		display: inline;
 		float: left;
 		// display: flex;
@@ -229,6 +230,7 @@
 		}
 		
 		view{
+			margin-left: 10rpx;
 			text-align: left;
 			font-size: 20rpx;
 		}
