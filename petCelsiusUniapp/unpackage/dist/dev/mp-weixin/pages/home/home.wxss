@@ -36,24 +36,27 @@ swiper image {
   height: 100%;
 }
 .nav-list {
+  border-top: 1rpx solid #000;
+  border-bottom: 1rpx solid #000;
+  box-shadow: 0 2px 3px -1px rgba(255, 0, 0, 0.3);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 30rpx 20rpx;
 }
 .nav-list .nav-item {
+  width: 20%;
   margin: 30rpx;
   text-align: center;
 }
 .nav-list .nav-item .nav-img {
   justify-content: center;
-  width: 100rpx;
-  height: 100rpx;
+  width: 50%;
 }
 .nav-list .nav-item .nav-title {
   text-align: center;
   color: #333;
-  font-size: 30rpx;
+  font-size: 25rpx;
 }
 .floor-title {
   margin: 15rpx 0;

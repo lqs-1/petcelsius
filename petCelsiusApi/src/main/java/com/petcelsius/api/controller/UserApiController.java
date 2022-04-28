@@ -55,6 +55,11 @@ public class UserApiController {
 //    }
 
 
+    /**
+     * 获取验证码，根据手机号码来保存
+     * @param mobile
+     * @return
+     */
     // 获取验证码
     @GetMapping("getSmsCode/{mobile}")
     public R generateSmsCode(@PathVariable("mobile") String mobile){
@@ -123,12 +128,18 @@ public class UserApiController {
     }
 
 
+    /**
+     * 用户头像上传到oss，并返回对应的头像url
+     * @param topic
+     * @return
+     * @throws IOException
+     */
     // 上传头像
     @PostMapping("topicUpload")
     public String topicUpload(@RequestBody MultipartFile topic) throws IOException {
         String originalFilename = topic.getOriginalFilename();
         InputStream inputStream = topic.getInputStream();
-        System.out.println(originalFilename);
+//        System.out.println(originalFilename);
 
 
         try{
@@ -142,11 +153,16 @@ public class UserApiController {
     }
 
 
+    /**
+     * 修改用户的信息，包括头像
+     * @param alterUser
+     * @return
+     */
     // 修改用户信息
     @PostMapping("alterUserInfo")
     public R alterUserInfo(@RequestBody User alterUser){
 
-        System.out.println(alterUser);
+//        System.out.println(alterUser);
         try {
             userService.updateByIdself(alterUser);
 

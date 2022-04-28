@@ -16,6 +16,10 @@ public class CooperateInfoServiceImpl extends ServiceImpl<CooperateInfoMapper, C
     @Value("${oss.base.url}")
     private String ossBaseUrl;
 
+    /**
+     * 获取所有的合作机构的基本信息
+     * @return
+     */
     @Override
     public List<CooperateInfo> selectAll() {
         List<CooperateInfo> cooperateInfos = this.baseMapper.selectAll();

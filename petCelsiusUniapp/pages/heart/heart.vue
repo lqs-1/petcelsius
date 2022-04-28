@@ -119,6 +119,14 @@
 			this.getHeartList()
 		},
 		
+		
+		onPullDownRefresh() {
+			this.getUser()
+			// console.log(this.user)
+			this.getHeartLogoList()
+			this.getHeartList()
+		},
+		
 		methods: {
 			// 获取用户信息
 			// 检测是否登录
@@ -186,7 +194,8 @@
 
 	.scroll-view {
 		/* position: fixed; */
-		margin: 20rpx 20rpx;
+		box-shadow: 0 2px 3px -1px rgba($color: red, $alpha: 0.3); //底部阴影
+		margin: 20rpx 0;
 		width: 100%;
 		text-align: center;
 		white-space: nowrap;
@@ -213,7 +222,8 @@
 	}
 	.swiper-view{
 		// 添加阴影
-		box-shadow: 8rpx 10rpx 8rpx rgba($color: #000000, $alpha: 0.3);
+		// box-shadow: 8rpx 10rpx 8rpx rgba($color: #EDBB99, $alpha: 0.3);
+		box-shadow: rgba($color: #000000, $alpha: 0.3) 8rpx 8rpx 8rpx;
 		display: inline;
 		float: left;
 		// display: flex;

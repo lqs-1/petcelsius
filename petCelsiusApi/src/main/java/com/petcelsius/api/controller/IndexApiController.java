@@ -29,7 +29,6 @@ public class IndexApiController {
      * 获取首页banner图，前5条
      * @return
      */
-
     @GetMapping("indexBanner")
     public R indexBanner(){
         try {
@@ -67,6 +66,10 @@ public class IndexApiController {
     }
 
 
+    /**
+     * 获取首页楼层 信息
+     * @return
+     */
     @GetMapping("indexFloor")
     public R indexFloor(){
         try {

@@ -21,6 +21,11 @@ public class IndexFloorImgServiceImpl extends ServiceImpl<IndexFloorImgMapper, I
     @Value("${oss.base.url}")
     private String ossBaseUrl;
 
+    /**
+     * 根据楼层基本信息的id查询出楼层对应的小图
+     * @param floorId
+     * @return
+     */
     @Override
     public List<IndexFloorImg> selectByFloorId(Long floorId) {
         List<IndexFloorImg> indexFloorImgList = this.baseMapper.selectByFloorId(floorId);
@@ -34,6 +39,7 @@ public class IndexFloorImgServiceImpl extends ServiceImpl<IndexFloorImgMapper, I
             String real_floor_img = ossBaseUrl + floor_img;
             item.setFloor_img(real_floor_img);
 
+            // TODO 下面的语句未null，后面再实现
             item.setIndexFloorDetail(indexFloorDetail);
             return item;
         }).collect(Collectors.toList());

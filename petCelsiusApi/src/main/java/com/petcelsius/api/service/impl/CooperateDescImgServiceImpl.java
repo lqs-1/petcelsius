@@ -17,6 +17,11 @@ public class CooperateDescImgServiceImpl extends ServiceImpl<CooperateDescImgMap
     private String ossBaseUrl;
 
 
+    /**
+     * 根据合作机构基本信息的id来查询对应的详情图片
+     * @param cooperateId
+     * @return
+     */
     @Override
     public List<CooperateDescImg> selectListByCooperateId(Long cooperateId) {
         List<CooperateDescImg> cooperateDescImgList = this.baseMapper.selectListByCooperateId(cooperateId);

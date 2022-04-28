@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 27/04/2022 09:22:39
+ Date: 28/04/2022 15:52:03
 */
 
 SET NAMES utf8mb4;
@@ -45,7 +45,7 @@ CREATE TABLE `auth_group_permissions`  (
   INDEX `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm`(`permission_id` ASC) USING BTREE,
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_group_permissions
@@ -63,7 +63,7 @@ CREATE TABLE `auth_permission`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `auth_permission_content_type_id_codename_01ab375a_uniq`(`content_type_id` ASC, `codename` ASC) USING BTREE,
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 80 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -175,7 +175,7 @@ CREATE TABLE `auth_user`  (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user
@@ -195,7 +195,7 @@ CREATE TABLE `auth_user_groups`  (
   INDEX `auth_user_groups_group_id_97559544_fk_auth_group_id`(`group_id` ASC) USING BTREE,
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_groups
@@ -214,7 +214,7 @@ CREATE TABLE `auth_user_user_permissions`  (
   INDEX `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm`(`permission_id` ASC) USING BTREE,
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_user_permissions
@@ -234,7 +234,7 @@ CREATE TABLE `cooperate_desc_img`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `cooperate_desc_img_cooperate_id_5539269f_fk_cooperate_info_id`(`cooperate_id` ASC) USING BTREE,
   CONSTRAINT `cooperate_desc_img_cooperate_id_5539269f_fk_cooperate_info_id` FOREIGN KEY (`cooperate_id`) REFERENCES `cooperate_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cooperate_desc_img
@@ -257,7 +257,7 @@ CREATE TABLE `cooperate_info`  (
   `address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `desc` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cooperate_info
@@ -284,7 +284,7 @@ CREATE TABLE `django_admin_log`  (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_chk_1` CHECK (`action_flag` >= 0)
-) ENGINE = InnoDB AUTO_INCREMENT = 110 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 156 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -443,6 +443,7 @@ INSERT INTO `django_admin_log` VALUES (151, '2022-04-27 00:55:39.314225', '6', '
 INSERT INTO `django_admin_log` VALUES (152, '2022-04-27 00:55:57.610122', '5', '调调', 2, '[{\"changed\": {\"fields\": [\"\\u5ba0\\u7269\\u540d\\u79f0\"]}}]', 16, 1);
 INSERT INTO `django_admin_log` VALUES (153, '2022-04-27 00:56:12.130019', '4', '小菲', 2, '[{\"changed\": {\"fields\": [\"\\u5ba0\\u7269\\u540d\\u79f0\"]}}]', 16, 1);
 INSERT INTO `django_admin_log` VALUES (154, '2022-04-27 00:56:27.112952', '3', '果酱', 2, '[{\"changed\": {\"fields\": [\"\\u5ba0\\u7269\\u540d\\u79f0\"]}}]', 16, 1);
+INSERT INTO `django_admin_log` VALUES (155, '2022-04-28 06:50:06.112382', '3', '宠物纪念品', 2, '[{\"changed\": {\"fields\": [\"Banner\\u56fe\"]}}]', 9, 1);
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -454,7 +455,7 @@ CREATE TABLE `django_content_type`  (
   `model` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label` ASC, `model` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -491,7 +492,7 @@ CREATE TABLE `django_migrations`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -574,7 +575,7 @@ CREATE TABLE `heart_detail_image`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `heart_detail_image_heart_id_fcfd7549_fk_heart_info_id`(`heart_id` ASC) USING BTREE,
   CONSTRAINT `heart_detail_image_heart_id_fcfd7549_fk_heart_info_id` FOREIGN KEY (`heart_id`) REFERENCES `heart_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of heart_detail_image
@@ -601,7 +602,7 @@ CREATE TABLE `heart_info`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `heart_info_user_id_746fd4a1_fk_user_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `heart_info_user_id_746fd4a1_fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of heart_info
@@ -626,7 +627,7 @@ CREATE TABLE `heart_logo`  (
   `title` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `logo` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of heart_logo
@@ -650,13 +651,13 @@ CREATE TABLE `index_banner`  (
   `alter_time` datetime(6) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of index_banner
 -- ----------------------------
 INSERT INTO `index_banner` VALUES (2, '2022-04-12 06:25:03.919360', 0, '宠物缅怀', 'remember.jpg', 1, '2022-04-12 06:25:03.919360');
-INSERT INTO `index_banner` VALUES (3, '2022-04-12 06:25:21.752209', 0, '宠物纪念品', 'guhui.jpg', 2, '2022-04-12 06:25:21.752209');
+INSERT INTO `index_banner` VALUES (3, '2022-04-12 06:25:21.752209', 0, '宠物纪念品', '猫_2_UAVQ6em.jpg', 2, '2022-04-28 06:50:05.873649');
 INSERT INTO `index_banner` VALUES (4, '2022-04-12 06:25:41.772483', 0, '宠物树葬', 'tree.jpg', 3, '2022-04-12 06:25:41.772483');
 INSERT INTO `index_banner` VALUES (5, '2022-04-12 06:26:48.200602', 0, '宠物服务', 'hot.jfif', 4, '2022-04-12 06:26:48.200602');
 INSERT INTO `index_banner` VALUES (6, '2022-04-12 06:27:09.681122', 0, '军犬风采', 'luo1.jpg', 5, '2022-04-12 06:27:09.681122');
@@ -676,7 +677,7 @@ CREATE TABLE `index_floor`  (
   `index` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of index_floor
@@ -697,7 +698,7 @@ CREATE TABLE `index_floor_detail`  (
   `del_mark` tinyint(1) NULL DEFAULT NULL,
   `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of index_floor_detail
@@ -737,7 +738,7 @@ CREATE TABLE `index_floor_img`  (
   INDEX `index_floor_img_floor_id_d7f5ad3d_fk_index_floor_id`(`floor_id` ASC) USING BTREE,
   CONSTRAINT `index_floor_img_detail_id_10f40639_fk_userBack_` FOREIGN KEY (`detail_id`) REFERENCES `index_floor_detail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `index_floor_img_floor_id_d7f5ad3d_fk_index_floor_id` FOREIGN KEY (`floor_id`) REFERENCES `index_floor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of index_floor_img
@@ -773,7 +774,7 @@ CREATE TABLE `index_navigate`  (
   `index` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of index_navigate
@@ -799,13 +800,13 @@ CREATE TABLE `user`  (
   `alter_time` datetime(6) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `mobile`(`mobile` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, NULL, NULL, '李奇凇', '17398827615', 'https://greatmall.oss-cn-chengdu.aliyuncs.com/topic/2022-04-22/2363f87435aa4510af6da19fdc761f3c.jpg', '2022-04-11 12:41:45.000000');
-INSERT INTO `user` VALUES (2, '2022-04-11 12:42:16.000000', 0, 'liqisong', '17398827616', 'https://greatmall.oss-cn-chengdu.aliyuncs.com/topic/2022-04-20/4e9c46387747449d825f6ab9e86c55c8.jpg', '2022-04-20 03:00:17.000000');
+INSERT INTO `user` VALUES (1, NULL, NULL, '李尚书', '17398827615', 'https://greatmall.oss-cn-chengdu.aliyuncs.com/topic/2022-04-28/7ab4205d555545fbb435b3402e710ef2.jpg', '2022-04-11 12:41:45.000000');
+INSERT INTO `user` VALUES (2, '2022-04-11 12:42:16.000000', 0, '李奇凇', '17398827616', 'https://greatmall.oss-cn-chengdu.aliyuncs.com/topic/2022-04-28/45747e1d81164bacae81fd9d9543fa9f.jpg', '2022-04-20 03:00:17.000000');
 
 -- ----------------------------
 -- Table structure for userBack_petinfo

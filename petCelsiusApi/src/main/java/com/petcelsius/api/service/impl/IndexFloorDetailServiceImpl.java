@@ -8,8 +8,16 @@ import org.springframework.stereotype.Service;
 
 @Service("IndexFloorDetailService")
 public class IndexFloorDetailServiceImpl extends ServiceImpl<IndexFloorDetailMapper, IndexFloorDetail> implements IndexFloorDetailService {
+
+    /**
+     * 根据每个楼层右边的图片，点击查出对应详情信息
+     * 当前未实现
+     * @param detail_id
+     * @return
+     */
     @Override
     public IndexFloorDetail selectById(Long detail_id) {
+        // TODO 未实现楼层点击跳转查询
         IndexFloorDetail indexFloorDetail = this.getBaseMapper().findById(detail_id);
         return indexFloorDetail;
     }

@@ -21,7 +21,7 @@
 			 纪念品
 			 -->
 			<view class="nav-item" v-for="(item, i) in navibarList" :key="item.id" @click="navClickHandler(item)">
-				<image :src="item.icon" class="nav-img"></image>
+				<image :src="item.icon" class="nav-img" mode="widthFix"></image>
 				<view class="nav-title">{{item.title}}</view>
 			</view>
 		</view>
@@ -144,23 +144,30 @@
 	// 导航栏
 	.nav-list{
 		// 显示到一行
+		border-top:1rpx solid #000;
+		border-bottom:1rpx solid #000;
+		box-shadow: 0 2px 3px -1px rgba($color: red, $alpha: 0.3); //底部阴影
+		// border-right:1px solid #000;
+		// border-left:1px solid #000;
 		display: flex;
 		flex-wrap: wrap;   
 		justify-content: space-around;
 		margin: 30rpx 20rpx;
 		// background-color: #ffffcc;
 		.nav-item{
+			width: 20%;
 			margin: 30rpx;
 			text-align: center;
 			.nav-img{
 				justify-content: center;
-				width: 100rpx;
-				height: 100rpx;
+				// width: 100rpx;
+				width: 50%;
+				// height: 100rpx;
 			}
 			.nav-title{
 				text-align: center;
 				color: #333;
-				font-size: 30rpx;
+				font-size: 25rpx;
 			}
 		}
 	}

@@ -251,6 +251,14 @@ var _default =
     this.getHeartList();
   },
 
+
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.getUser();
+    // console.log(this.user)
+    this.getHeartLogoList();
+    this.getHeartList();
+  },
+
   methods: {
     // 获取用户信息
     // 检测是否登录
