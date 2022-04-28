@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class HeartListVo {
+    // TODO 继续完善
     private Long userId;
     private Long petId;
     private String topic;

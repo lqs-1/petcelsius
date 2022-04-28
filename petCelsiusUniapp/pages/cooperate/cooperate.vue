@@ -51,6 +51,8 @@
 		background-color: #F2F3F4
 	}
 	.content-item{
+		// 添加阴影
+		box-shadow: 8rpx 10rpx 8rpx rgba($color: #999999, $alpha: 0.3);
 		display: flex;
 		flex-wrap: nowrap;
 		background-color: #FFFFFF;

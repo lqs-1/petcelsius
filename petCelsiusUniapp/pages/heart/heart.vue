@@ -212,6 +212,7 @@
 		background-color: #F2F3F4;
 	}
 	.swiper-view{
+		// 添加阴影
 		box-shadow: 8rpx 10rpx 8rpx rgba($color: #000000, $alpha: 0.3);
 		display: inline;
 		float: left;

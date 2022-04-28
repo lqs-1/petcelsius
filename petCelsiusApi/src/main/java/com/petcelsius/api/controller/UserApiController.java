@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +35,12 @@ public class UserApiController {
 
     @Autowired
     private OSS ossClient;
+
+    @Value("${oss.base.url}")
+    private String ossBaseUrl;
+
+    @Value("${oss.bucketName}")
+    private String bucketName;
 
     // 检测登录状态, 这个方法用不了，没服务器环境带不了cookie
 //    @GetMapping("checkSession")
@@ -71,16 +78,18 @@ public class UserApiController {
     }
 
 
-
+    /**
+     * 不用session
+     * @param logvo
+     * @return
+     */
     // 登录
     @PostMapping("loginUser")
-    public R loginUser(HttpServletRequest request, @RequestBody Logvo logvo){
+    public R loginUser(@Valid @RequestBody Logvo logvo){
 
 
         String mobile = logvo.getMobile();
         String smsCode = logvo.getSmsCode().trim();
-
-        HttpSession session = request.getSession();
 
         String smsCodeKey = "sms" + mobile;
         try{
@@ -112,13 +121,6 @@ public class UserApiController {
         }
         return R.error();
     }
-
-
-    @Value("${oss.base.url}")
-    private String ossBaseUrl;
-
-    @Value("${oss.bucketName}")
-    private String bucketName;
 
 
     // 上传头像

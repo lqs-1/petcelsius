@@ -49,10 +49,6 @@
 				</view>
 			</view>
 		</view>
-		
-		
-		
-		
 	</view>
 </template>
 
@@ -131,8 +127,8 @@
 <style lang="scss">
 	// 背景颜色
 	page{
-		background-color: #ccffff
-		
+		// background-color: #ccffff
+		background-color: #F2F3F4;
 	}
 	
 	// 轮播

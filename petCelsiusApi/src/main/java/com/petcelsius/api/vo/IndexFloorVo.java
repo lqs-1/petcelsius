@@ -9,5 +9,6 @@ import java.util.List;
 
 @Data
 public class IndexFloorVo extends IndexFloor implements Serializable {
+    // TODO 继续完善
     private List<IndexFloorImg> indexFloorImgList;
 }
