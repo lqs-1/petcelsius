@@ -2,6 +2,7 @@ package com.petcelsius.api.controller;
 
 
 import com.aliyun.oss.OSS;
+import com.petcelsius.api.constant.MessageConstant;
 import com.petcelsius.api.domain.User;
 import com.petcelsius.api.service.UserService;
 import com.petcelsius.api.utils.*;
@@ -75,11 +76,11 @@ public class UserApiController {
                 opsForValue.set(smsCodeKey, smsCode, 60*5, TimeUnit.SECONDS);
             }catch (Exception e){
                 e.printStackTrace();
-                return R.error("redis链接失败");
+                return R.error(MessageConstant.REDIS_CONNECTION_FAIL);
             }
-            return R.ok("发送成功");
+            return R.ok(MessageConstant.SEND_VALIDATECODE_SUCCESS);
         }
-        return R.error("发送失败");
+        return R.error(MessageConstant.SEND_VALIDATECODE_FAIL);
     }
 
 
