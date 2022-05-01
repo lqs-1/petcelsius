@@ -14,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 public class UserApiController {
 
     @Autowired
-    private RedisTemplate<String , String> redisTemplate;
+    private JedisPool jedisPool;
 
     @Autowired
     private UserService userService;
@@ -65,15 +67,15 @@ public class UserApiController {
     @GetMapping("getSmsCode/{mobile}")
     public R generateSmsCode(@PathVariable("mobile") String mobile){
         String smsCode = GenerateSmsCode.generateSmsCode();
-        System.out.println(mobile);
+//        System.out.println(mobile);
         // 发送验证码
         Result result = SMSUtils.sendShortMessage(mobile, smsCode);
 
         if (result.isFlag()){
             String smsCodeKey = "sms" + mobile;
             try{
-                ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
-                opsForValue.set(smsCodeKey, smsCode, 60*5, TimeUnit.SECONDS);
+                Jedis jedis = jedisPool.getResource();
+                jedis.setex(smsCodeKey, 60*5, smsCode);
             }catch (Exception e){
                 e.printStackTrace();
                 return R.error(MessageConstant.REDIS_CONNECTION_FAIL);
@@ -99,8 +101,10 @@ public class UserApiController {
 
         String smsCodeKey = "sms" + mobile;
         try{
-            String realSmsCode = redisTemplate.opsForValue().get(smsCodeKey);
+            Jedis jedis = jedisPool.getResource();
+            String realSmsCode = jedis.get(smsCodeKey);
             if (smsCode.equals(realSmsCode)){
+                // System.out.println("获取成功" + realSmsCode);
                 // 如果有用户就查出来返回
                 User user = userService.findByMobile(mobile);
                 if (user != null){

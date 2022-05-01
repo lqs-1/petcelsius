@@ -1,6 +1,10 @@
 package com.petcelsius.api.exception;
 
 
+import com.petcelsius.api.controller.CooperateApiController;
+import com.petcelsius.api.controller.HeartApiController;
+import com.petcelsius.api.controller.IndexApiController;
+import com.petcelsius.api.controller.UserApiController;
 import com.petcelsius.api.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
@@ -9,10 +13,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 自定义异常处理器，这个是全局的
+ * 自定义异常处理器，这个是全局的,controller层的异常
  */
 @Slf4j
-@RestControllerAdvice()
+@RestControllerAdvice
 public class SelfExceptionHandler {
 
     /**
