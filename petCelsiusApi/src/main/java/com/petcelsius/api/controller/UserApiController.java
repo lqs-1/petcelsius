@@ -2,28 +2,25 @@ package com.petcelsius.api.controller;
 
 
 import com.aliyun.oss.OSS;
+import com.petcelsius.api.constant.Constant;
 import com.petcelsius.api.constant.MessageConstant;
 import com.petcelsius.api.domain.User;
 import com.petcelsius.api.service.UserService;
 import com.petcelsius.api.utils.*;
-import com.petcelsius.api.vo.Logvo;
+import com.petcelsius.api.vo.LoginByEmailVo;
+import com.petcelsius.api.vo.LoginByMobilelVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -39,11 +36,15 @@ public class UserApiController {
     @Autowired
     private OSS ossClient;
 
+    @Autowired
+    private EmailCodeUtils emailCodeUtils;
+
     @Value("${oss.base.url}")
     private String ossBaseUrl;
 
     @Value("${oss.bucketName}")
     private String bucketName;
+
 
     // 检测登录状态, 这个方法用不了，没服务器环境带不了cookie
 //    @GetMapping("checkSession")
@@ -72,10 +73,10 @@ public class UserApiController {
         Result result = SMSUtils.sendShortMessage(mobile, smsCode);
 
         if (result.isFlag()){
-            String smsCodeKey = "sms" + mobile;
+            String smsCodeKey = MessageConstant.SMSCODE_PREFIX + mobile;
             try{
                 Jedis jedis = jedisPool.getResource();
-                jedis.setex(smsCodeKey, 60*5, smsCode);
+                jedis.setex(smsCodeKey, Constant.VALIDATE_TIMEOUT, smsCode);
             }catch (Exception e){
                 e.printStackTrace();
                 return R.error(MessageConstant.REDIS_CONNECTION_FAIL);
@@ -93,13 +94,13 @@ public class UserApiController {
      */
     // 登录
     @PostMapping("loginUser")
-    public R loginUser(@Valid @RequestBody Logvo logvo){
+    public R loginUser(@Valid @RequestBody LoginByMobilelVo logvo){
 
 
         String mobile = logvo.getMobile();
         String smsCode = logvo.getSmsCode().trim();
 
-        String smsCodeKey = "sms" + mobile;
+        String smsCodeKey = MessageConstant.SMSCODE_PREFIX + mobile;
         try{
             Jedis jedis = jedisPool.getResource();
             String realSmsCode = jedis.get(smsCodeKey);
@@ -122,8 +123,10 @@ public class UserApiController {
 //                session.setAttribute("user", byId);
 //                session.setMaxInactiveInterval(60*60*5);
 //                String id = session.getId();
+                jedis.del(smsCodeKey);
                 return R.ok().put("user", byId);
             }
+            return R.error();
         }catch (Exception e){
 
             e.printStackTrace();
@@ -180,6 +183,86 @@ public class UserApiController {
         }
 
     }
+
+    /**
+     * 下面两个是补充接口，如果不行就用邮箱
+     */
+
+    /**
+     * 获取邮箱验证码
+     * @param email
+     * @return
+     */
+    @GetMapping("getEmailCode/{email}")
+    public R getEmailCode(@PathVariable("email") String email){
+        // System.out.println(email);
+        String emailCOde = GenerateEmailCode.generateEmailCode();
+        try{
+            // 发送验证码
+            R result = emailCodeUtils.sendSimpleEmailCode(email, emailCOde);
+            // System.out.println(result.get("msg"));
+            if (result.get("msg") == MessageConstant.SEND_EMAILCODE_SUCCESS){
+                // 缓存验证码
+                Jedis jedis = jedisPool.getResource();
+                String emailCodeKey = MessageConstant.EMAIL_PREFIX + email;
+                jedis.setex(emailCodeKey, Constant.VALIDATE_TIMEOUT, emailCOde);
+            }
+            // 成功返回数据
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+            // 失败返回错误信息
+            return R.error(MessageConstant.SEND_EMAILCODE_FAIL);
+        }
+    }
+
+
+    /**
+     * 登录通过邮箱验证
+     */
+    @PostMapping("emailLogin")
+    public R loginUserByEmail(@Valid @RequestBody LoginByEmailVo loginByEmailVo){
+        String email = loginByEmailVo.getEmail();
+        // 获取验证码并且去掉两边空白
+        String emailCode = loginByEmailVo.getEmailCode().trim();
+        String emailCodeKdy = MessageConstant.EMAIL_PREFIX + email;
+        try{
+
+            Jedis jedis = jedisPool.getResource();
+            String realEmailCode = jedis.get(emailCodeKdy);
+            if (emailCode.equals(realEmailCode)){
+                User user = userService.findByMobile(email);
+                if (user != null){
+//                    session.setAttribute("user", user);
+//                    session.setMaxInactiveInterval(60*60*5);
+//                    String id = session.getId();
+                    return R.ok().put("user", user);
+                }
+                // 如果没有用户就保存之后返回
+                User newUser = new User();
+                newUser.setMobile(loginByEmailVo.getEmail());
+                newUser.setUsername(loginByEmailVo.getEmail());
+                userService.save(newUser);
+                User byId = userService.getById(newUser.getId());
+//                session.setAttribute("user", byId);
+//                session.setMaxInactiveInterval(60*60*5);
+//                String id = session.getId();
+                // 验证完成删除验证码
+                jedis.del(emailCodeKdy);
+                return R.ok().put("user", byId);
+            }
+            // 成功返回数据
+            return R.error();
+        }catch (Exception e){
+            e.printStackTrace();
+            // 失败返回错误信息
+            return R.error();
+        }
+
+    }
+
+
+
 
 
 

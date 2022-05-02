@@ -4,8 +4,6 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.common.comm.ResponseMessage;
 import com.aliyun.oss.model.PutObjectResult;
 
-
-import java.io.File;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;

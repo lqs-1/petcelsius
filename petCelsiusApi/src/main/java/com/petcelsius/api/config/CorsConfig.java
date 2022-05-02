@@ -7,6 +7,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+
+/**
+ * 前端没有端口就不用配置跨域
+ */
 @Configuration
 public class CorsConfig {
     private CorsConfiguration buildConfig() {

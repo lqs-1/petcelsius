@@ -5,11 +5,11 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class Logvo {
+public class LoginByEmailVo {
     // TODO 继续完善
 
     @NotBlank
-    private String mobile;
+    private String email;
     @NotBlank
-    private String smsCode;
+    private String emailCode;
 }

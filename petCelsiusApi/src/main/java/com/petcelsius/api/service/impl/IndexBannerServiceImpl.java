@@ -25,6 +25,8 @@ public class IndexBannerServiceImpl extends ServiceImpl<IndexBannerMapper, Index
     @Override
     public List<IndexBanner> selectBannerToFive() {
 
+
+
         List<IndexBanner> indexBanners = this.baseMapper.selectBannerToFive();
         // 处理数据，image地址补充完整
         List<IndexBanner> realBannerList = indexBanners.stream().map(item -> {

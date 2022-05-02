@@ -1,10 +1,12 @@
 package com.petcelsius.api.utils;
 
+import java.util.Random;
+
 public class GenerateSmsCode {
 
     public static String generateSmsCode(){
 
-        Integer smsCodeNumber = (int)((Math.random()*9+1)*1000);
+        int smsCodeNumber = new Random().nextInt(9999) + 1000;
 
         String smsCode = String.valueOf(smsCodeNumber);
         return smsCode;

@@ -13,4 +13,13 @@ public class Constant {
     public static final String SENDSMSCODEROUTERKEY = "sms.#";
 
 
+    // 正则常量
+    public static final String MOBILE_REGEX = "^1[356789]{1}[0-9]{9}$";
+    public static final String EMAIL_REGEX = "^\\w+@\\w+\\.\\w+$";
+
+
+    // redis里面卖的验证码过期时间（短信和邮箱通用）
+    public static final Integer VALIDATE_TIMEOUT = 60*5;
+
+
 }
