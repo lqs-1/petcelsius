@@ -20,6 +20,11 @@ public class Constant {
 
     // redis里面卖的验证码过期时间（短信和邮箱通用）
     public static final Integer VALIDATE_TIMEOUT = 60*5;
+    // 存在redis中的验证码的key前缀
+    public static final String EMAIL_PREFIX = "email";
+    public static final String SMSCODE_PREFIX = "sms";
 
 
+    // 邮件发件人昵称
+    public static final String NICK_NAME = "宠物℃";
 }

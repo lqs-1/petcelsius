@@ -42,7 +42,6 @@ public class UserApiController {
     @Value("${oss.base.url}")
     private String ossBaseUrl;
 
-    @Value("${oss.bucketName}")
     private String bucketName;
 
 
@@ -73,7 +72,7 @@ public class UserApiController {
         Result result = SMSUtils.sendShortMessage(mobile, smsCode);
 
         if (result.isFlag()){
-            String smsCodeKey = MessageConstant.SMSCODE_PREFIX + mobile;
+            String smsCodeKey = Constant.SMSCODE_PREFIX + mobile;
             try{
                 Jedis jedis = jedisPool.getResource();
                 jedis.setex(smsCodeKey, Constant.VALIDATE_TIMEOUT, smsCode);
@@ -100,7 +99,7 @@ public class UserApiController {
         String mobile = logvo.getMobile();
         String smsCode = logvo.getSmsCode().trim();
 
-        String smsCodeKey = MessageConstant.SMSCODE_PREFIX + mobile;
+        String smsCodeKey = Constant.SMSCODE_PREFIX + mobile;
         try{
             Jedis jedis = jedisPool.getResource();
             String realSmsCode = jedis.get(smsCodeKey);
@@ -199,12 +198,12 @@ public class UserApiController {
         String emailCOde = GenerateEmailCode.generateEmailCode();
         try{
             // 发送验证码
-            R result = emailCodeUtils.sendSimpleEmailCode(email, emailCOde);
+            R result = emailCodeUtils.sendEmailCode(email, emailCOde, false);
             // System.out.println(result.get("msg"));
             if (result.get("msg") == MessageConstant.SEND_EMAILCODE_SUCCESS){
                 // 缓存验证码
                 Jedis jedis = jedisPool.getResource();
-                String emailCodeKey = MessageConstant.EMAIL_PREFIX + email;
+                String emailCodeKey = Constant.EMAIL_PREFIX + email;
                 jedis.setex(emailCodeKey, Constant.VALIDATE_TIMEOUT, emailCOde);
             }
             // 成功返回数据
@@ -225,7 +224,7 @@ public class UserApiController {
         String email = loginByEmailVo.getEmail();
         // 获取验证码并且去掉两边空白
         String emailCode = loginByEmailVo.getEmailCode().trim();
-        String emailCodeKdy = MessageConstant.EMAIL_PREFIX + email;
+        String emailCodeKdy = Constant.EMAIL_PREFIX + email;
         try{
 
             Jedis jedis = jedisPool.getResource();
