@@ -1,6 +1,8 @@
 package com.petcelsius.api.utils;
 
 
+import com.petcelsius.api.constant.REnum;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +12,12 @@ import java.util.Map;
  * @author Mark sunlightcs@gmail.com
  */
 public class R extends HashMap<String, Object> {
+
     private static final long serialVersionUID = 1L;
 
     public R() {
-        put("code", 0);
-        put("msg", "success");
+        put("code", REnum.SUCCESS.getStatusCode());
+        put("msg", REnum.SUCCESS.getStatusMsg());
     }
 
 
@@ -27,8 +30,8 @@ public class R extends HashMap<String, Object> {
 
     public static R error() {
         R r = new R();
-        r.put("code", 1);
-        r.put("msg", "fail");
+        r.put("code", REnum.FAIL.getStatusCode());
+        r.put("msg", REnum.FAIL.getStatusMsg());
         return r;
     }
 
@@ -58,5 +61,11 @@ public class R extends HashMap<String, Object> {
     public R put(String key, Object value) {
         super.put(key, value);
         return this;
+    }
+
+
+    public static void main(String[] args) {
+        R ok = R.error();
+        System.out.println(ok);
     }
 }
