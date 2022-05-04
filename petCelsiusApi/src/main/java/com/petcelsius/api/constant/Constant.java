@@ -1,5 +1,7 @@
 package com.petcelsius.api.constant;
 
+import java.nio.charset.StandardCharsets;
+
 public class Constant {
     // 分页参数常量
     public static final String PAGE = "page";
@@ -27,4 +29,12 @@ public class Constant {
 
     // 邮件发件人昵称
     public static final String NICK_NAME = "宠物℃";
+
+
+    // 信息加密的摘要方式
+    public static final String DIGEST_TYPE = "MD5";
+    // md5返回结果名
+    public static final String MD5_RESULT_NAME = "md5code";
+    // 编码类型
+    public static final String CODING_TYPE = StandardCharsets.UTF_8.name();
 }
