@@ -261,6 +261,9 @@ public class UserApiController {
 
             Jedis jedis = jedisPool.getResource();
             String realEmailCode = jedis.get(emailCodeKdy);
+            // 验证完成删除验证码
+            jedis.del(emailCodeKdy);
+//            System.out.println(realEmailCode);
             if (emailCode.equals(realEmailCode)){
                 User user = userService.findByMobile(email);
                 if (user != null){
@@ -278,8 +281,7 @@ public class UserApiController {
 //                session.setAttribute("user", byId);
 //                session.setMaxInactiveInterval(60*60*5);
 //                String id = session.getId();
-                // 验证完成删除验证码
-                jedis.del(emailCodeKdy);
+
                 return R.ok().put("user", byId);
             }
             // 成功返回数据
