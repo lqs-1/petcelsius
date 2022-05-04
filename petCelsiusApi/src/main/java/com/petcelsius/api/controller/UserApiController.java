@@ -119,6 +119,9 @@ public class UserApiController {
         try{
             Jedis jedis = jedisPool.getResource();
             String realSmsCode = jedis.get(smsCodeKey);
+            // 删除对应缓存 TODO
+            // jedis.del(smsCodeKey);
+            // System.out.println(realSmsCode);
             if (smsCode.equals(realSmsCode)){
                 // System.out.println("获取成功" + realSmsCode);
                 // 如果有用户就查出来返回
