@@ -42,12 +42,14 @@ public class UserApiController {
     @Value("${oss.base.url}")
     private String ossBaseUrl;
 
+    @Value("${oss.bucketName}")
     private String bucketName;
 
 
     // 检测登录状态, 这个方法用不了，没服务器环境带不了cookie
 //    @GetMapping("checkSession")
 //    public R checkSession(HttpServletRequest request){
+//
 //        HttpSession session = request.getSession();
 //        Object user = session.getAttribute("user");
 //        System.out.println(user);
@@ -66,7 +68,15 @@ public class UserApiController {
     // 获取验证码
     @GetMapping("getSmsCode/{mobile}")
     public R generateSmsCode(@PathVariable("mobile") String mobile){
+
+        // 验证手机号
+        Boolean isMobile = Re.mobileNumberValidate(mobile);
+        if (!isMobile){
+            return R.error(MessageConstant.MOBILE_CODE_FAIL);
+        }
+
         String smsCode = GenerateSmsCode.generateSmsCode();
+
 //        System.out.println(mobile);
         // 发送验证码
         Result result = SMSUtils.sendShortMessage(mobile, smsCode);
@@ -95,8 +105,14 @@ public class UserApiController {
     @PostMapping("loginUser")
     public R loginUser(@Valid @RequestBody LoginByMobilelVo logvo){
 
-
         String mobile = logvo.getMobile();
+
+        // 验证手机号格式
+        Boolean isMobile = Re.mobileNumberValidate(mobile);
+        if (!isMobile){
+            return R.error(MessageConstant.MOBILE_CODE_FAIL);
+        }
+
         String smsCode = logvo.getSmsCode().trim();
 
         String smsCodeKey = Constant.SMSCODE_PREFIX + mobile;
@@ -144,6 +160,7 @@ public class UserApiController {
     // 上传头像
     @PostMapping("topicUpload")
     public String topicUpload(@RequestBody MultipartFile topic) throws IOException {
+
         String originalFilename = topic.getOriginalFilename();
         InputStream inputStream = topic.getInputStream();
 //        System.out.println(originalFilename);
@@ -194,7 +211,14 @@ public class UserApiController {
      */
     @GetMapping("getEmailCode/{email}")
     public R getEmailCode(@PathVariable("email") String email){
+
         // System.out.println(email);
+        // 验证邮箱格式
+        Boolean isEmail = Re.emailValidate(email);
+        if (!isEmail){
+            return R.error(MessageConstant.EMAIL_CODE_FAIL);
+        }
+
         String emailCOde = GenerateEmailCode.generateEmailCode();
         try{
             // 发送验证码
@@ -221,7 +245,15 @@ public class UserApiController {
      */
     @PostMapping("emailLogin")
     public R loginUserByEmail(@Valid @RequestBody LoginByEmailVo loginByEmailVo){
+
         String email = loginByEmailVo.getEmail();
+
+        // 验证邮箱格式
+        Boolean isEmail = Re.emailValidate(email);
+        if (!isEmail){
+            return R.error(MessageConstant.EMAIL_CODE_FAIL);
+        }
+
         // 获取验证码并且去掉两边空白
         String emailCode = loginByEmailVo.getEmailCode().trim();
         String emailCodeKdy = Constant.EMAIL_PREFIX + email;
@@ -261,8 +293,13 @@ public class UserApiController {
     }
 
 
+    public static void main(String[] args) {
 
-
+        boolean is = false;
+        if(!is){
+            System.out.println("ok");
+        }
+    }
 
 
 
