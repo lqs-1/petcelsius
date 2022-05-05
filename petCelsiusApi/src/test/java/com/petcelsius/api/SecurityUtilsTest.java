@@ -9,7 +9,7 @@ import com.petcelsius.api.utils.security.digest.MessageDigestUtil;
 import org.junit.jupiter.api.Test;
 
 
-class PetCelsiusApiApplicationTests {
+class SecurityUtilsTest {
 
     @Test
     void digestTest() throws Exception {
