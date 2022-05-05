@@ -16,13 +16,13 @@ import java.security.MessageDigest;
 public class DigestUtil {
 
     // 信息加密的摘要方式，用于设置默认
-    public static final String DIGEST_TYPE_MD = "MD5";
+    private static final String DIGEST_TYPE_MD = "MD5";
 
     // 编码类型
-    public static final String CODING_TYPE = StandardCharsets.UTF_8.name();
+    private static final String CODING_TYPE = StandardCharsets.UTF_8.name();
 
     // 内部枚举,算法选择
-    public static enum DigestTypeSelector{
+    public enum DigestTypeSelector{
 
         MD5(1, "MD5"),
 
@@ -195,7 +195,7 @@ public class DigestUtil {
         try {
 
             // 生成一个MD5加密计算摘要
-            MessageDigest md = MessageDigest.getInstance(Constant.DIGEST_RESULT_NAME);
+            MessageDigest md = MessageDigest.getInstance(DIGEST_TYPE_MD);
 
             // 如果内容比较多就用update，他会切割之后，循环来摘要
             md.update(originString.getBytes(CODING_TYPE));

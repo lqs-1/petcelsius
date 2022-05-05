@@ -2,6 +2,7 @@ package com.petcelsius.api.utils.security.cipher.keypair;
 
 import com.petcelsius.api.constant.Constant;
 import com.petcelsius.api.utils.R;
+import com.petcelsius.api.utils.security.cipher.onekey.OneKeyCipherUtils;
 import com.petcelsius.api.utils.security.converter.Converter;
 import org.apache.commons.io.FileUtils;
 
@@ -20,6 +21,15 @@ import java.security.spec.X509EncodedKeySpec;
 
 
 public class KeyPairCipherUtils {
+
+    /**
+     * 一般来说公约用于加密，原因如下：
+     *  私钥是不公开的，公钥是公开的，如果一个公司使用私钥加密，那么这个公司所有的员工都可以解密，是不安全的
+     *  如果使用公钥加密，然后因为公钥是公开的，私钥是不公开的，就会安全很多
+     *
+     *  另外，我发现一点，如果使用私钥多次加密同一个明文，那么得到的始终是同一个密文
+     *                如果使用公钥多次加密，就会发现每次的密文都不一样，不知道为什么
+     */
 
     // 字符编码
     private static final String CODING_TYPE =StandardCharsets.UTF_8.name();
@@ -58,7 +68,7 @@ public class KeyPairCipherUtils {
      * @throws Exception
      */
 
-    public static enum CipherTypeSelector{
+    public enum CipherTypeSelector{
 
         /**
          * 使用RSA的时候的枚举变量
@@ -66,7 +76,11 @@ public class KeyPairCipherUtils {
 
         ALGORITHM_EN_PRIVATE( "RSA", "PRIVATE", "PUBLIC"),
 
-        ALGORITHM_EN_PUBLIC( "RSA", "PUBLIC", "PRIVATE");
+        ALGORITHM_EN_PUBLIC( "RSA", "PUBLIC", "PRIVATE"),
+
+        ALGORITHM_DE_PRIVATE( "RSA", "PUBLIC", "PRIVATE"),
+
+        ALGORITHM_DE_PUBLIC( "RSA", "PRIVATE", "PUBLIC");
 
 
         private String algorithmName;

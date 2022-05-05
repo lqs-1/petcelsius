@@ -21,16 +21,16 @@ import java.security.SecureRandom;
 public class OneKeyCipherUtils {
 
     // 编码类型
-    public static final String CODING_TYPE = StandardCharsets.UTF_8.name();
+    private static final String CODING_TYPE = StandardCharsets.UTF_8.name();
 
     // 默认的key生成算法
-    public static final String GENERATOR_KEY_ALGORITHM = "SHA1PRNG";
+    private static final String GENERATOR_KEY_ALGORITHM = "SHA1PRNG";
 
     // 加密状态码
-    public static final Integer ENCRYPT_MODE = 1;
+    private static final Integer ENCRYPT_MODE = 1;
 
     // 解密状态码
-    public static final Integer DECRYPT_MODE = 2;
+    private static final Integer DECRYPT_MODE = 2;
 
 
     /**
@@ -40,7 +40,7 @@ public class OneKeyCipherUtils {
      * 加密模式，分为ECB（分块加密）和CBC（链式加密），ECB安全性没有CBC好，ECB一块一块加密，CBC是类似于一个链子，前一个加密好以后，后面的加密密钥会根据key和iv向量的异或值获得，安全性更好
      * 填充模式，分为PKCS5Padding和NoPadding，NoPadding在长度不够的时候不会自动填充，然后报错，PKCS5Padding在长度不够的时候会自动填充，长度是八个字节，八个字节的整数倍
      */
-    public static enum CipherTypeSelector{
+    public enum CipherTypeSelector{
         /**
          * 如果只是“DES”或者“AES”, 那么就默认是DES/ECB/PKCS5Padding或AES/ECB/PKCS5Padding，NoPadding狗都不用
          */
