@@ -12,7 +12,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.Base64;
 
 /**
  * @author : 李奇凇
@@ -346,7 +345,7 @@ public class OneKeyCipherUtils {
     public static void utilsTest() throws Exception {
 
         // 加密
-        R encrypt = encrypt("李勋减肥我就覅未分级我去饿偶分为", "liqisong", CipherTypeSelector.DEFAULT_DES);
+        R encrypt = encrypt("李奇凇", "liqisong", CipherTypeSelector.DEFAULT_DES);
 
         String code  = (String) encrypt.get(Constant.CIPHER_RESULT_NAME);
 
@@ -359,5 +358,10 @@ public class OneKeyCipherUtils {
 
         System.out.println("解密后======> " + code1);
 
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        utilsTest();
     }
 }

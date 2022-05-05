@@ -43,7 +43,7 @@ public class Constant {
     // 信息摘要返回结果名
     public static final String DIGEST_RESULT_NAME = "digest_code";
 
-    // 加密信息返回结果名，加密解密用同一个，也就是明文密文用同一个
+    // 加密信息返回结果名，加密解密用同一个，也就是明文密文用同一个, 对称加密和非对称加密都用这个
     public static final String CIPHER_RESULT_NAME = "cipher_code";
 
 }
