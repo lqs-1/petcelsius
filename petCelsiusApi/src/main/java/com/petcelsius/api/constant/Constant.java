@@ -2,6 +2,11 @@ package com.petcelsius.api.constant;
 
 import java.nio.charset.StandardCharsets;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 内部使用常量类
+ */
 public class Constant {
     // 分页参数常量
     public static final String PAGE = "page";
@@ -29,12 +34,16 @@ public class Constant {
 
     // 邮件发件人昵称
     public static final String NICK_NAME = "宠物℃";
+    // 短信名称
+    public static final String SMS_SERVICE_NAME = "宠物℃";
+    public static final String SMS_TEMPLATE = "SMS_154950909";
+    public static final String SMS_TEMPLATE_BY_RLY_ID = "1";
 
 
-    // 信息加密的摘要方式
-    public static final String DIGEST_TYPE = "MD5";
-    // md5返回结果名
-    public static final String MD5_RESULT_NAME = "md5code";
-    // 编码类型
-    public static final String CODING_TYPE = StandardCharsets.UTF_8.name();
+    // 信息摘要返回结果名
+    public static final String DIGEST_RESULT_NAME = "digest_code";
+
+    // 加密信息返回结果名，加密解密用同一个，也就是明文密文用同一个
+    public static final String CIPHER_RESULT_NAME = "cipher_code";
+
 }

@@ -6,6 +6,11 @@ import com.petcelsius.api.mapper.IndexFloorDetailMapper;
 import com.petcelsius.api.service.IndexFloorDetailService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 接口实现
+ */
 @Service("IndexFloorDetailService")
 public class IndexFloorDetailServiceImpl extends ServiceImpl<IndexFloorDetailMapper, IndexFloorDetail> implements IndexFloorDetailService {
 

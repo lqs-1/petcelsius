@@ -4,14 +4,20 @@ package com.petcelsius.api.utils;
 
 import com.cloopen.rest.sdk.BodyType;
 import com.cloopen.rest.sdk.CCPRestSmsSDK;
+import com.petcelsius.api.constant.Constant;
 import com.petcelsius.api.constant.MessageConstant;
+import com.petcelsius.api.utils.entity.SMSEntity;
+import org.springframework.beans.factory.annotation.Value;
 
 
 import java.util.HashMap;
 import java.util.Set;
 
+
 /**
- * 短信发送工具类
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 发送短信工具类,需要启动spring容器
  */
 public class SMSUtils {
 
@@ -20,31 +26,21 @@ public class SMSUtils {
      *
      * @param phoneNumbers
      * @param param
+     * @param smsEntity
      * @return
      * @throws
      */
-    public static Result sendShortMessage(String phoneNumbers, String param) {
-        //生产环境请求地址：app.cloopen.com
-        String serverIp = "app.cloopen.com";
-        //请求端口
-        String serverPort = "8883";
-        //主账号,登陆云通讯网站后,可在控制台首页看到开发者主账号ACCOUNT SID和主账号令牌AUTH TOKEN
-        String accountSId = "8a216da87ca23458017cd12b56d008d1";
-        String accountToken = "a4837f29b26d4a9380c516e5e0320e0b";
-        //请使用管理控制台中已创建应用的APPID
-        String appId = "8a216da87ca23458017cd12b57ce08d8";
-        CCPRestSmsSDK sdk = new CCPRestSmsSDK();
-        sdk.init(serverIp, serverPort);
-        sdk.setAccount(accountSId, accountToken);
-        sdk.setAppId(appId);
-        sdk.setBodyType(BodyType.Type_JSON);
+
+    public static Result sendShortMessage(String phoneNumbers, String param, SMSEntity smsEntity) {
+
+        CCPRestSmsSDK sdk = getCcpRestSmsSDK(smsEntity);
+
         String to = phoneNumbers;
-        String templateId = "1";
+        String templateId = Constant.SMS_TEMPLATE_BY_RLY_ID;
         String[] datas = {param, "5"};
-//		String subAppend="1234";  //可选 扩展码，四位数字 0~9999
-//		String reqId="fadfafas";  //可选 第三方自定义消息id，最大支持32位英文数字，同账号下同一自然天内不允许重复
+
         HashMap<String, Object> result = sdk.sendTemplateSMS(to, templateId, datas);
-//		HashMap<String, Object> result = sdk.sendTemplateSMS(to,templateId,datas,"","");
+
         if ("000000".equals(result.get("statusCode"))) {
             //正常返回输出data包体信息（map）
             HashMap<String, Object> data = (HashMap<String, Object>) result.get("data");
@@ -63,7 +59,14 @@ public class SMSUtils {
 
     }
 
-    public static void main(String[] args) {
-        SMSUtils.sendShortMessage("17398827615", "1234");
+    // 创建发送短信的对象
+    private static CCPRestSmsSDK getCcpRestSmsSDK(SMSEntity smsEntity) {
+        CCPRestSmsSDK sdk = new CCPRestSmsSDK();
+        sdk.init(smsEntity.getServerIp(), smsEntity.getServerPort());
+        sdk.setAccount(smsEntity.getAccountSId(), smsEntity.getAccountToken());
+        sdk.setAppId(smsEntity.getApplicationId());
+        sdk.setBodyType(BodyType.Type_JSON);
+        return sdk;
     }
+
 }

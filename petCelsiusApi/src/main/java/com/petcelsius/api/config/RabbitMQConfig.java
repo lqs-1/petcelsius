@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 单体架构和mq有关系吗，是的没有关系
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : rabbitmq交换机和队列绑定配置类，但是，单体架构和mq有关系吗，是的没有关系
  */
 @Configuration
 public class RabbitMQConfig {

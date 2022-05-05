@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 首页controller
+ */
 @RestController
 @RequestMapping("indexApi")
 public class IndexApiController {

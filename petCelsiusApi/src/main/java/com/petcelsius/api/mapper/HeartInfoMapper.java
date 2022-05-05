@@ -6,6 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 缅怀信息mapper接口
+ */
 @Mapper
 public interface HeartInfoMapper extends BaseMapper<HeartInfo> {
     List<HeartInfo> selectAll();

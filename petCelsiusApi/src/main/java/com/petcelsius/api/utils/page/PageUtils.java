@@ -5,6 +5,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 分页工具类，分页之后抽取数据，封装数据
+ */
+
 public class PageUtils implements Serializable {
 
     private int currentPage;

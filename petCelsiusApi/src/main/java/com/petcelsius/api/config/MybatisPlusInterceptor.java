@@ -4,6 +4,11 @@ import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : mybatisplus分页插件
+ */
 @Configuration
 public class MybatisPlusInterceptor {
 

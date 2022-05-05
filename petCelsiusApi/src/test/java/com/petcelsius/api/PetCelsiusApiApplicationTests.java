@@ -1,13 +1,16 @@
 package com.petcelsius.api;
 
+import com.petcelsius.api.constant.Constant;
+import com.petcelsius.api.utils.R;
+import com.petcelsius.api.utils.security.cipher.onekey.OneKeyCipherUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+
 class PetCelsiusApiApplicationTests {
 
     @Test
-    void contextLoads() {
+    void contextLoads() throws Exception {
+        OneKeyCipherUtils.utilsTest();
     }
 
 }

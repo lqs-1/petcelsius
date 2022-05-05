@@ -5,6 +5,11 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 缅怀类型实体类
+ */
 @Data
 public class HeartLogo implements Serializable {
     private Long id;

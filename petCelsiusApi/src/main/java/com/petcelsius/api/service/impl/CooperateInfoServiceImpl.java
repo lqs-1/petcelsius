@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 接口实现
+ */
 @Service("CooperateInfoService")
 public class CooperateInfoServiceImpl extends ServiceImpl<CooperateInfoMapper, CooperateInfo> implements CooperateInfoService {
 

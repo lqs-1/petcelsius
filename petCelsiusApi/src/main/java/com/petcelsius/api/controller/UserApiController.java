@@ -7,6 +7,7 @@ import com.petcelsius.api.constant.MessageConstant;
 import com.petcelsius.api.domain.User;
 import com.petcelsius.api.service.UserService;
 import com.petcelsius.api.utils.*;
+import com.petcelsius.api.utils.entity.SMSEntity;
 import com.petcelsius.api.vo.LoginByEmailVo;
 import com.petcelsius.api.vo.LoginByMobilelVo;
 import org.springframework.beans.BeanUtils;
@@ -22,7 +23,11 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 用户controller
+ */
 @RestController
 @RequestMapping("userApi")
 public class UserApiController {
@@ -44,6 +49,12 @@ public class UserApiController {
 
     @Value("${oss.bucketName}")
     private String bucketName;
+
+
+    // 获取sms配置
+    @Autowired
+    private SMSEntity smsEntity;
+
 
 
     // 检测登录状态, 这个方法用不了，没服务器环境带不了cookie
@@ -69,6 +80,11 @@ public class UserApiController {
     @GetMapping("getSmsCode/{mobile}")
     public R generateSmsCode(@PathVariable("mobile") String mobile){
 
+//         System.out.println(smsEntity.getApplicationId());
+//         System.out.println(smsEntity.getAccountToken());
+//         System.out.println(smsEntity.getAccountSId());
+//         System.out.println(smsEntity.getServerIp());
+//         System.out.println(smsEntity.getServerPort());
         // 验证手机号
         Boolean isMobile = Re.mobileNumberValidate(mobile);
         if (!isMobile){
@@ -79,7 +95,7 @@ public class UserApiController {
 
 //        System.out.println(mobile);
         // 发送验证码
-        Result result = SMSUtils.sendShortMessage(mobile, smsCode);
+        Result result = SMSUtils.sendShortMessage(mobile, smsCode, smsEntity);
 
         if (result.isFlag()){
             String smsCodeKey = Constant.SMSCODE_PREFIX + mobile;

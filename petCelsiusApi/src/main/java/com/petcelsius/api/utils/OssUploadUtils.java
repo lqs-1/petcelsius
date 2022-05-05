@@ -9,6 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 文件上传到oss工具类
+ */
+
 public class OssUploadUtils {
     /**
      *

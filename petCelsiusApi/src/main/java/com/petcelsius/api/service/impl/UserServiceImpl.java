@@ -8,6 +8,11 @@ import com.petcelsius.api.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 接口实现
+ */
 @Service("UserService")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 

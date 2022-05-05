@@ -1,10 +1,6 @@
 package com.petcelsius.api.exception;
 
 
-import com.petcelsius.api.controller.CooperateApiController;
-import com.petcelsius.api.controller.HeartApiController;
-import com.petcelsius.api.controller.IndexApiController;
-import com.petcelsius.api.controller.UserApiController;
 import com.petcelsius.api.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
@@ -12,6 +8,11 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 自定义异常处理器，这个是全局的controller层的异常
+ */
 /**
  * 自定义异常处理器，这个是全局的,controller层的异常
  */

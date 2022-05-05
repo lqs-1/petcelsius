@@ -19,8 +19,11 @@ import java.util.Date;
 
 
 /**
- * 一定要加到容器中在使用，如果直接使用这个工具类，会报空指针异常
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 发送邮件工具类，一定要加到容器中在使用，如果直接使用这个工具类，会报空指针异常
  */
+
 @Component
 public class EmailCodeUtils {
 

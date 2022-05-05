@@ -2,6 +2,12 @@ package com.petcelsius.api.utils;
 
 import java.util.Random;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 生成短信验证码工具类
+ */
+
 public class GenerateSmsCode {
 
     public static String generateSmsCode(){

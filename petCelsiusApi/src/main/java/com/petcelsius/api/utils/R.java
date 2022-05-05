@@ -6,11 +6,13 @@ import com.petcelsius.api.constant.REnum;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
- * 返回数据
- *
- * @author Mark sunlightcs@gmail.com
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 相应数据工具类
  */
+
 public class R extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 1L;

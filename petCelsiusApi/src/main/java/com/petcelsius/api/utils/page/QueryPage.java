@@ -7,6 +7,11 @@ import com.petcelsius.api.constant.Constant;
 
 import java.util.Map;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 分页查询工具类，获取分页的必要数据，和升序降序，和排序字段
+ */
 
 public class QueryPage<T> {
 

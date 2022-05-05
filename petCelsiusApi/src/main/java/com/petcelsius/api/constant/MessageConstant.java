@@ -1,5 +1,13 @@
 package com.petcelsius.api.constant;
 
+import com.petcelsius.api.utils.R;
+import com.petcelsius.api.utils.security.digest.DigestUtil;
+
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 相应对象的消息常量类
+ */
 public class MessageConstant {
     // 短信常量
     public static final String SEND_VALIDATECODE_SUCCESS = "发送验证码成功";

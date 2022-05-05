@@ -6,11 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+
 /**
- * redis使用jedis的连接池配置
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : redis使用jedis的连接池配置
  */
-
-
 @Configuration
 public class JedisPollFactory {
     @Value("${spring.redis.host}")

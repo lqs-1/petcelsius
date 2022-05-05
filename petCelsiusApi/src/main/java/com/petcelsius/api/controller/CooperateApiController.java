@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 合作controller
+ */
 @RestController
 @RequestMapping("cooperateApi")
 public class CooperateApiController {

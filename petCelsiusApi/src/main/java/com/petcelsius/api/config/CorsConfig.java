@@ -7,7 +7,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 跨域配置，前端没有端口就不用配置跨域
+ */
 /**
  * 前端没有端口就不用配置跨域
  */
