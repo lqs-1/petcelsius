@@ -10,6 +10,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
@@ -277,7 +278,7 @@ public class OneKeyCipherUtils {
      * @throws Exception
      */
 
-    public static R encryption(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static R encryption(@NotNull String origin, @NotNull String key, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         try{
 
@@ -311,7 +312,7 @@ public class OneKeyCipherUtils {
      * @throws Exception
      */
 
-    public static R decryption(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static R decryption(@NotNull String origin, @NotNull String key, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         try{
 
@@ -351,7 +352,7 @@ public class OneKeyCipherUtils {
      * @throws Exception
      */
 
-    public static Encrypt encrypt(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static Encrypt encrypt(@NotNull String origin, @NotNull String key, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         try{
 
@@ -388,7 +389,7 @@ public class OneKeyCipherUtils {
      * @throws Exception
      */
 
-    public static Decrypt decrypt(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static Decrypt decrypt(@NotNull String origin, @NotNull String key, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         try{
 

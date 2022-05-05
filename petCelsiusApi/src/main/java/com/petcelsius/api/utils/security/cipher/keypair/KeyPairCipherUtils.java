@@ -6,6 +6,7 @@ import com.petcelsius.api.utils.security.converter.Converter;
 import org.apache.commons.io.FileUtils;
 
 import javax.crypto.Cipher;
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
@@ -258,7 +259,7 @@ public class KeyPairCipherUtils {
      * @throws Exception
      */
 
-    public static Encrypt encrypt(String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static Encrypt encrypt(@NotNull String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         /**
          * 读取文件中的公钥或者私钥进行加密
@@ -347,7 +348,7 @@ public class KeyPairCipherUtils {
      * @throws Exception
      */
 
-    public static R encryption(String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static R encryption(@NotNull String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         /**
          * 读取文件中的公钥或者私钥进行加密
@@ -433,7 +434,7 @@ public class KeyPairCipherUtils {
      * @param cipherTypeSelector 算法选项
      */
 
-    public static Decrypt decrypt(String origin, CipherTypeSelector cipherTypeSelector){
+    public static Decrypt decrypt(@NotNull String origin, CipherTypeSelector cipherTypeSelector){
 
         /**
          * 读取文件中的公钥或者私钥进行解密
@@ -495,7 +496,7 @@ public class KeyPairCipherUtils {
      * @param cipherTypeSelector 算法选项
      */
 
-    public static R decryption(String origin, CipherTypeSelector cipherTypeSelector){
+    public static R decryption(@NotNull String origin, CipherTypeSelector cipherTypeSelector){
 
         /**
          * 读取文件中的公钥或者私钥进行解密

@@ -2,6 +2,7 @@ package com.petcelsius.api.utils.security.digest;
 
 import com.petcelsius.api.utils.security.converter.Converter;
 
+import javax.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
@@ -57,7 +58,7 @@ public class MessageDigestUtil {
 
 
     // 普通方式, 默认使用md5
-    public static Encrypt doDigest(String originString){
+    public static Encrypt doDigest(@NotNull String originString){
 
         return simpleDigest(originString);
 
@@ -66,7 +67,7 @@ public class MessageDigestUtil {
 
 
     // 普通方式, 默认使用md5，是否选择摘要大量数据
-    public static Encrypt doDigest(String originString, boolean isHug){
+    public static Encrypt doDigest(@NotNull String originString, boolean isHug){
 
         if (isHug){
 
@@ -80,7 +81,7 @@ public class MessageDigestUtil {
 
 
     // 普通方式, 默认使用md5，是否选择摘要大量数据，并且选择使用的算法
-    public static Encrypt doDigest(String originString, DigestTypeSelector digestType, boolean isHug){
+    public static Encrypt doDigest(@NotNull String originString, DigestTypeSelector digestType, boolean isHug){
 
         if (isHug){
 
@@ -95,7 +96,7 @@ public class MessageDigestUtil {
 
 
     // 加盐方式,默认使用md5
-    public static Encrypt doPlusDigest(String originString, String plusString){
+    public static Encrypt doPlusDigest(@NotNull String originString, String plusString){
 
         return simpleDigest(originString + plusString);
 
@@ -104,7 +105,7 @@ public class MessageDigestUtil {
 
 
     // 加盐方式,默认使用md5,选择是否摘要大量数据
-    public static Encrypt doPlusDigest(String originString, String plusString, boolean isHug){
+    public static Encrypt doPlusDigest(@NotNull String originString, @NotNull String plusString, boolean isHug){
 
         if (isHug){
 
@@ -119,7 +120,7 @@ public class MessageDigestUtil {
 
 
     // 加盐方式,默认使用md5,选择是否摘要大量数据,是否选择算法
-    public static Encrypt doPlusDigest(String originString, String plusString, DigestTypeSelector digestType, boolean isHug){
+    public static Encrypt doPlusDigest(@NotNull String originString, @NotNull String plusString, DigestTypeSelector digestType, boolean isHug){
 
         if (isHug){
 

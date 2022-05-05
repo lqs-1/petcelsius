@@ -4,6 +4,7 @@ import com.petcelsius.api.constant.Constant;
 import com.petcelsius.api.utils.R;
 import com.petcelsius.api.utils.security.converter.Converter;
 
+import javax.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
@@ -59,7 +60,7 @@ public class DigestUtil {
 
 
     // 普通方式, 默认使用md5
-    public static R doDigest(String originString){
+    public static R doDigest(@NotNull String originString){
 
         return simpleDigest(originString);
 
@@ -68,7 +69,7 @@ public class DigestUtil {
 
 
     // 普通方式, 默认使用md5，是否选择摘要大量数据
-    public static R doDigest(String originString, boolean isHug){
+    public static R doDigest(@NotNull String originString, boolean isHug){
 
         if (isHug){
 
@@ -82,7 +83,7 @@ public class DigestUtil {
 
 
     // 普通方式, 默认使用md5，是否选择摘要大量数据，并且选择使用的算法
-    public static R doDigest(String originString, DigestTypeSelector digestType, boolean isHug){
+    public static R doDigest(@NotNull String originString, DigestTypeSelector digestType, boolean isHug){
 
         if (isHug){
 
@@ -97,7 +98,7 @@ public class DigestUtil {
 
 
     // 加盐方式,默认使用md5
-    public static R doPlusDigest(String originString, String plusString){
+    public static R doPlusDigest(@NotNull String originString, @NotNull String plusString){
 
         return simpleDigest(originString + plusString);
 
@@ -106,7 +107,7 @@ public class DigestUtil {
 
 
     // 加盐方式,默认使用md5,选择是否摘要大量数据
-    public static R doPlusDigest(String originString, String plusString, boolean isHug){
+    public static R doPlusDigest(@NotNull String originString, @NotNull String plusString, boolean isHug){
 
         if (isHug){
 
@@ -121,7 +122,7 @@ public class DigestUtil {
 
 
     // 加盐方式,默认使用md5,选择是否摘要大量数据,是否选择算法
-    public static R doPlusDigest(String originString, String plusString, DigestTypeSelector digestType, boolean isHug){
+    public static R doPlusDigest(@NotNull String originString, @NotNull String plusString, DigestTypeSelector digestType, boolean isHug){
 
         if (isHug){
 
