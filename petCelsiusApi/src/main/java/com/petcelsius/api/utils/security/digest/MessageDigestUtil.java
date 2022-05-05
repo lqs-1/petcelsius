@@ -1,7 +1,5 @@
 package com.petcelsius.api.utils.security.digest;
 
-import com.petcelsius.api.constant.Constant;
-import com.petcelsius.api.utils.R;
 import com.petcelsius.api.utils.security.converter.Converter;
 
 import java.nio.charset.StandardCharsets;
@@ -13,7 +11,7 @@ import java.security.MessageDigest;
  * @date : 2022/5/5 8:46
  * @do : md5的工具类,md5.sha1,sha256.sha512,转换器有两种一个base64，一个hex（十六进制）,是不可逆的， 也就是不能解密
  */
-public class DigestUtil {
+public class MessageDigestUtil {
 
     // 信息加密的摘要方式，用于设置默认
     private static final String DIGEST_TYPE_MD = "MD5";
@@ -59,7 +57,7 @@ public class DigestUtil {
 
 
     // 普通方式, 默认使用md5
-    public static R doDigest(String originString){
+    public static Encrypt doDigest(String originString){
 
         return simpleDigest(originString);
 
@@ -68,7 +66,7 @@ public class DigestUtil {
 
 
     // 普通方式, 默认使用md5，是否选择摘要大量数据
-    public static R doDigest(String originString, boolean isHug){
+    public static Encrypt doDigest(String originString, boolean isHug){
 
         if (isHug){
 
@@ -82,7 +80,7 @@ public class DigestUtil {
 
 
     // 普通方式, 默认使用md5，是否选择摘要大量数据，并且选择使用的算法
-    public static R doDigest(String originString, DigestTypeSelector digestType, boolean isHug){
+    public static Encrypt doDigest(String originString, DigestTypeSelector digestType, boolean isHug){
 
         if (isHug){
 
@@ -97,7 +95,7 @@ public class DigestUtil {
 
 
     // 加盐方式,默认使用md5
-    public static R doPlusDigest(String originString, String plusString){
+    public static Encrypt doPlusDigest(String originString, String plusString){
 
         return simpleDigest(originString + plusString);
 
@@ -106,7 +104,7 @@ public class DigestUtil {
 
 
     // 加盐方式,默认使用md5,选择是否摘要大量数据
-    public static R doPlusDigest(String originString, String plusString, boolean isHug){
+    public static Encrypt doPlusDigest(String originString, String plusString, boolean isHug){
 
         if (isHug){
 
@@ -121,7 +119,7 @@ public class DigestUtil {
 
 
     // 加盐方式,默认使用md5,选择是否摘要大量数据,是否选择算法
-    public static R doPlusDigest(String originString, String plusString, DigestTypeSelector digestType, boolean isHug){
+    public static Encrypt doPlusDigest(String originString, String plusString, DigestTypeSelector digestType, boolean isHug){
 
         if (isHug){
 
@@ -136,7 +134,7 @@ public class DigestUtil {
 
 
     // md5加密工具类，加密少量，使用md5算法，默认
-    private static R simpleDigest(String originString) {
+    private static Encrypt simpleDigest(String originString) {
 
         try {
 
@@ -149,13 +147,13 @@ public class DigestUtil {
             // 转换格式
             String md5String = Converter.converterBytesToBase64(digest);
 
-            return R.ok().put(Constant.DIGEST_RESULT_NAME, md5String);
+            return new Encrypt(md5String);
 
         } catch (Exception e) {
 
             e.printStackTrace();
 
-            return R.error();
+            return new Encrypt(null);
 
         }
     }
@@ -163,7 +161,7 @@ public class DigestUtil {
 
 
     // 指定算法名称的摘要
-    private static R simpleDigest(String originString, DigestTypeSelector digestType) {
+    private static Encrypt simpleDigest(String originString, DigestTypeSelector digestType) {
 
         try {
 
@@ -174,15 +172,15 @@ public class DigestUtil {
             byte[] digest = md.digest(originString.getBytes(CODING_TYPE));
 
             // 转换格式
-            String digestString = Converter.converterBytesToBase64(digest);
+            String md5String = Converter.converterBytesToBase64(digest);
 
-            return R.ok().put(Constant.DIGEST_RESULT_NAME, digestString);
+            return new Encrypt(md5String);
 
         } catch (Exception e) {
 
             e.printStackTrace();
 
-            return R.error();
+            return new Encrypt(null);
 
         }
     }
@@ -190,7 +188,7 @@ public class DigestUtil {
 
 
     // md5加密工具类，加密大量，也是md5的
-    private static R hugDigest(String originString) {
+    private static Encrypt hugDigest(String originString) {
 
         try {
 
@@ -206,13 +204,13 @@ public class DigestUtil {
             // 转换
             String md5String = Converter.converterBytesToBase64(digest);
 
-            return R.ok().put(Constant.DIGEST_RESULT_NAME, md5String);
+            return new Encrypt(md5String);
 
         } catch (Exception e) {
 
             e.printStackTrace();
 
-            return R.error();
+            return new Encrypt(null);
 
         }
     }
@@ -220,7 +218,7 @@ public class DigestUtil {
 
 
     // md5加密工具类，加密大量，也是md5的
-    private static R hugDigest(String originString, DigestTypeSelector digestType) {
+    private static Encrypt hugDigest(String originString, DigestTypeSelector digestType) {
 
         try {
 
@@ -234,19 +232,40 @@ public class DigestUtil {
             byte[] digest = md.digest();
 
             // 转换
-            String digestString = Converter.converterBytesToBase64(digest);
+            String md5String = Converter.converterBytesToBase64(digest);
 
-            return R.ok().put(Constant.DIGEST_RESULT_NAME, digestString);
+            return new Encrypt(md5String);
 
         } catch (Exception e) {
 
             e.printStackTrace();
 
-            return R.error();
+            return new Encrypt(null);
 
         }
     }
 
+    /**
+     * 加密之后封装成此对象，此对象的getCode可以获取密文
+     */
+
+    public static class Encrypt{
+
+        private String strCode;
+
+        private Encrypt(String strCode){
+
+            this.strCode = strCode;
+
+        }
+
+        public String getStrCode() {
+
+            return strCode;
+
+        }
+    }
+    
 
     // 工具测试
     public static void utilsTest(){
@@ -254,11 +273,11 @@ public class DigestUtil {
         String origin = "李奇凇";
 
         // 加密
-        R r = doDigest(origin, DigestTypeSelector.SHA_512, false);
+        Encrypt encrypt = doDigest(origin, DigestTypeSelector.SHA_512, false);
 
         System.out.println("加密前=========>" + origin);
 
-        System.out.println("加密后=========>" + r.get(Constant.DIGEST_RESULT_NAME));
+        System.out.println("加密后=========>" + encrypt.getStrCode());
 
     }
 

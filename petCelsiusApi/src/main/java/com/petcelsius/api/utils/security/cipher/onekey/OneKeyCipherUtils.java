@@ -273,11 +273,11 @@ public class OneKeyCipherUtils {
      * @param origin 明文
      * @param key 原始key
      * @param cipherTypeSelector 加密方式选项
-     * @return String 密文
+     * @return R 对象
      * @throws Exception
      */
 
-    public static R encrypt(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static R encryption(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         try{
 
@@ -307,11 +307,11 @@ public class OneKeyCipherUtils {
      * @param origin 密文
      * @param key 原始key
      * @param cipherTypeSelector 解密方式选项，和加密方式选项一摸一样
-     * @return String 明文
+     * @return R 对象
      * @throws Exception
      */
 
-    public static R decrypt(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static R decryption(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         try{
 
@@ -342,19 +342,141 @@ public class OneKeyCipherUtils {
     }
 
 
+    /**
+     * 加密
+     * @param origin 明文
+     * @param key 原始key
+     * @param cipherTypeSelector 加密方式选项
+     * @return Encrypt 对象
+     * @throws Exception
+     */
+
+    public static Encrypt encrypt(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+
+        try{
+
+            // 获取加密的cipher对象
+            Cipher cipher = getCipher(cipherTypeSelector, key, ENCRYPT_MODE);
+
+            // 获取加密后的字节数组
+            byte[] bytes = cipher.doFinal(origin.getBytes());
+
+            // 将字节数组转码
+            String resultString = Converter.converterBytesToBase64(bytes);
+
+            // 成功返回数据
+            // return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString);
+            return new Encrypt(resultString);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+            // 失败返回错误信息
+            // return R.error();
+            return new Encrypt(null);
+
+        }
+    }
+
+    /**
+     * 解密
+     * @param origin 密文
+     * @param key 原始key
+     * @param cipherTypeSelector 解密方式选项，和加密方式选项一摸一样
+     * @return Decrypt 对象
+     * @throws Exception
+     */
+
+    public static Decrypt decrypt(String origin, String key, CipherTypeSelector cipherTypeSelector) throws Exception {
+
+        try{
+
+            // 获取加密对象
+            Cipher cipher = getCipher(cipherTypeSelector, key, DECRYPT_MODE);
+
+            // 将base64的密文转码为字节数组
+            byte[] originBytes = Converter.converterBase64ToBytes(origin);
+
+            // 将转换后的密文进行解码获取明文字节数组
+            byte[] bytes = cipher.doFinal(originBytes);
+
+            // 再将明文字节数组转码为字符串
+            String resultString = new String(bytes);
+
+            // 成功返回数据
+            // return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString);
+            return new Decrypt(resultString);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+            // 失败返回错误信息
+            // return R.error();
+            return new Decrypt(null);
+        }
+
+
+    }
+
+    /**
+     * 加密之后封装成此对象，此对象的getCode可以获取密文
+     */
+
+    public static class Encrypt{
+
+        private String strCode;
+
+        private Encrypt(String strCode){
+
+            this.strCode = strCode;
+
+        }
+
+        public String getStrCode() {
+
+            return strCode;
+
+        }
+    }
+
+
+    /**
+     * 解密之后封装成此对象，此对象的getCode可以获取明文
+     */
+
+    public static class Decrypt{
+
+        private String strCode;
+
+        private Decrypt(String strCode){
+
+            this.strCode = strCode;
+
+        }
+
+        public String getStrCode() {
+
+            return strCode;
+
+        }
+    }
+
+
     public static void utilsTest() throws Exception {
 
         // 加密
-        R encrypt = encrypt("李奇凇", "liqisong", CipherTypeSelector.DEFAULT_DES);
+        Encrypt encrypt = encrypt("李奇凇", "liqisong", CipherTypeSelector.DEFAULT_DES);
 
-        String code  = (String) encrypt.get(Constant.CIPHER_RESULT_NAME);
+        String code  = encrypt.getStrCode();
 
         System.out.println("加密后======> " + code);
 
         // 解密
-        R decrypt = decrypt(code, "liqisong", CipherTypeSelector.DEFAULT_DES);
+        Decrypt decrypt = decrypt(code, "liqisong", CipherTypeSelector.DEFAULT_DES);
 
-        String code1 = (String) decrypt.get(Constant.CIPHER_RESULT_NAME);
+        String code1 = decrypt.getStrCode();
 
         System.out.println("解密后======> " + code1);
 

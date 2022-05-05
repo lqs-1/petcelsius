@@ -2,7 +2,6 @@ package com.petcelsius.api.utils.security.cipher.keypair;
 
 import com.petcelsius.api.constant.Constant;
 import com.petcelsius.api.utils.R;
-import com.petcelsius.api.utils.security.cipher.onekey.OneKeyCipherUtils;
 import com.petcelsius.api.utils.security.converter.Converter;
 import org.apache.commons.io.FileUtils;
 
@@ -29,6 +28,7 @@ public class KeyPairCipherUtils {
      *
      *  另外，我发现一点，如果使用私钥多次加密同一个明文，那么得到的始终是同一个密文
      *                如果使用公钥多次加密，就会发现每次的密文都不一样，不知道为什么
+     *                但是每一个公钥加密的明文都可以用私钥解密
      */
 
     // 字符编码
@@ -47,10 +47,10 @@ public class KeyPairCipherUtils {
     private static final String PRIVATE_KEY_FILE_NAME = "private.pem";
 
     // 加密状态码
-    public static final Integer ENCRYPT_MODE = 1;
+    private static final Integer ENCRYPT_MODE = 1;
 
     // 解密状态码
-    public static final Integer DECRYPT_MODE = 2;
+    private static final Integer DECRYPT_MODE = 2;
 
 
 
@@ -254,10 +254,11 @@ public class KeyPairCipherUtils {
      * 加密
      * @param origin 明文
      * @param cipherTypeSelector 加密选项
+     * @return Encrypt 对象
      * @throws Exception
      */
 
-    public static R encrypt(String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
+    public static Encrypt encrypt(String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
 
         /**
          * 读取文件中的公钥或者私钥进行加密
@@ -292,7 +293,96 @@ public class KeyPairCipherUtils {
             String resultString = Converter.converterBytesToBase64(bytes);
 
             // 加密后返回密文
-            return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString) ;
+            // return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString);
+            return new Encrypt(resultString);
+
+        } catch (Exception e) {
+
+            /**
+             * 没有密钥对文件，那么就生成密钥对然后加密，然后保存密钥对
+             */
+
+            // 生成密钥对
+            KeyPair keyPair = generateKeyPair(cipherTypeSelector);
+
+            // 用来存放读取出来的用来key
+            Key key = null;
+
+            // 根据用户算法选项来决定用哪个密钥加密
+            if (cipherTypeSelector.getEncryptKey().equals(PUBLIC_TYPE)) {
+
+                // 从生成的密钥对中获取publicKey
+                key = keyPair.getPublic();
+
+            } else if (cipherTypeSelector.getEncryptKey().equals(PRIVATE_TYPE)) {
+
+                // 从生成的密钥对中获取privateKey
+                key = keyPair.getPrivate();
+
+            }
+
+            // 获取cipher对象
+            Cipher cipher = getCipher(cipherTypeSelector, key, ENCRYPT_MODE);
+
+            // 加密之后获取到字节数组
+            byte[] bytes = cipher.doFinal(origin.getBytes(CODING_TYPE));
+
+            // 转码
+            String resultString = Converter.converterBytesToBase64(bytes);
+
+            // 加密后返回密文
+            // return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString) ;
+            return new Encrypt(resultString);
+
+        }
+
+    }
+
+
+    /**
+     * 加密
+     * @param origin 明文
+     * @param cipherTypeSelector 加密选项
+     * @return R 对象
+     * @throws Exception
+     */
+
+    public static R encryption(String origin, CipherTypeSelector cipherTypeSelector) throws Exception {
+
+        /**
+         * 读取文件中的公钥或者私钥进行加密
+         * 没有这个文件就会出现异常，在出现异常的时候，生成密钥对，然后进行操作
+         */
+
+        try {
+
+            // 用来存放读取出来的用来key
+            Key key = null;
+
+            // 根据用户算法选项来决定用哪个密钥加密
+            if (cipherTypeSelector.getEncryptKey().equals(PUBLIC_TYPE)) {
+
+                // 读取文件中的publicKey
+                key = getPublicKey(cipherTypeSelector);
+
+            } else if (cipherTypeSelector.getEncryptKey().equals(PRIVATE_TYPE)) {
+
+                // 读取文件中的privateKey
+                key = getPrivateKey(cipherTypeSelector);
+
+            }
+
+            // 获取cipher对象
+            Cipher cipher = getCipher(cipherTypeSelector, key, ENCRYPT_MODE);
+
+            // 加密之后获取到字节数组
+            byte[] bytes = cipher.doFinal(origin.getBytes(CODING_TYPE));
+
+            // 转码
+            String resultString = Converter.converterBytesToBase64(bytes);
+
+            // 加密后返回密文
+            return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString);
 
         } catch (Exception e) {
 
@@ -339,10 +429,73 @@ public class KeyPairCipherUtils {
     /**
      * 解密
      * @param origin 密文
+     * @return Decrypt 对象
      * @param cipherTypeSelector 算法选项
      */
 
-    public static R decrypt(String origin, CipherTypeSelector cipherTypeSelector){
+    public static Decrypt decrypt(String origin, CipherTypeSelector cipherTypeSelector){
+
+        /**
+         * 读取文件中的公钥或者私钥进行解密
+         * 没有这个文件就会出现异常，然后直接返回， 不再处理
+         */
+
+        try {
+
+            // 用来存放读取出来的用来key
+            Key key = null;
+
+            // 根据用户算法选项来决定用哪个密钥解密
+            if (cipherTypeSelector.getDecryptKey().equals(PUBLIC_TYPE)) {
+
+                // 读取文件中的publicKey
+                key = getPublicKey(cipherTypeSelector);
+
+            } else if (cipherTypeSelector.getDecryptKey().equals(PRIVATE_TYPE)) {
+
+                // 读取文件中的privateKey
+                key = getPrivateKey(cipherTypeSelector);
+
+            }
+
+            // 获取cipher对象
+            Cipher cipher = getCipher(cipherTypeSelector, key, DECRYPT_MODE);
+
+            // 解密获取到字节数组
+            byte[] bytes = cipher.doFinal(Converter.converterBase64ToBytes(origin));
+
+            // 转码
+            String resultString = new String(bytes);
+
+            // 返回数据，解密后的明文
+            // return R.ok().put(Constant.CIPHER_RESULT_NAME, resultString) ;
+            return new Decrypt(resultString);
+
+        } catch (Exception e) {
+
+            /**
+             * 没有密钥对文件，直接返回
+             */
+
+            e.printStackTrace();
+
+            // 返回错误信息
+            // return R.error();
+            return new Decrypt(null);
+
+        }
+
+    }
+
+
+    /**
+     * 解密
+     * @param origin 密文
+     * @return R 对象
+     * @param cipherTypeSelector 算法选项
+     */
+
+    public static R decryption(String origin, CipherTypeSelector cipherTypeSelector){
 
         /**
          * 读取文件中的公钥或者私钥进行解密
@@ -388,11 +541,58 @@ public class KeyPairCipherUtils {
             e.printStackTrace();
 
             // 返回错误信息
-            return R.error() ;
+            return R.error();
 
         }
 
     }
+
+
+    /**
+     * 加密之后封装成此对象，此对象的getCode可以获取密文
+     */
+
+    public static class Encrypt{
+
+        private String strCode;
+
+        private Encrypt(String strCode){
+
+            this.strCode = strCode;
+
+        }
+
+        public String getStrCode() {
+
+            return strCode;
+
+        }
+    }
+
+
+    /**
+     * 解密之后封装成此对象，此对象的getCode可以获取明文
+     */
+
+    public static class Decrypt{
+
+        private String strCode;
+
+        private Decrypt(String strCode){
+
+            this.strCode = strCode;
+
+        }
+
+        public String getStrCode() {
+
+            return strCode;
+
+        }
+    }
+
+
+
 
 
     /**
@@ -402,16 +602,16 @@ public class KeyPairCipherUtils {
     public static void utilsTest() throws Exception{
 
         // 加密数据
-        R encrypt = encrypt("李奇凇今天的天气不错", CipherTypeSelector.ALGORITHM_EN_PRIVATE);
+        Encrypt encrypt = encrypt("李奇凇今天的天气不错", CipherTypeSelector.ALGORITHM_EN_PRIVATE);
 
-        String code  = (String) encrypt.get(Constant.CIPHER_RESULT_NAME);
+        String code  = encrypt.getStrCode();
 
         System.out.println("加密后========>" + code);
 
         // 解密数据
-        R decrypt = decrypt(code, CipherTypeSelector.ALGORITHM_EN_PRIVATE);
+        Decrypt decrypt = decrypt(code, CipherTypeSelector.ALGORITHM_EN_PRIVATE);
 
-        String code1  = (String) decrypt.get(Constant.CIPHER_RESULT_NAME);
+        String code1  = decrypt.getStrCode();
 
         System.out.println("加密前========>" + code1);
 
