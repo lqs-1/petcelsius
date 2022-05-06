@@ -1,8 +1,5 @@
 package com.petcelsius.api.constant;
 
-import com.petcelsius.api.utils.R;
-import com.petcelsius.api.utils.security.digest.DigestUtil;
-
 /**
  * @author : 李奇凇
  * @date : 2022/5/5 8:46

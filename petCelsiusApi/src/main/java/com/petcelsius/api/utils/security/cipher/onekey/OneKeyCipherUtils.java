@@ -18,6 +18,7 @@ import java.security.SecureRandom;
  * @author : 李奇凇
  * @date : 2022/5/5 10:41
  * @do : 对称加密算法工具类，des和aes, 加密和解密使用同一个key
+ * return 的时候带tion的返回的是R对象，不带tion的返回的是内部加密对象
  */
 public class OneKeyCipherUtils {
 

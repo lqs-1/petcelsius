@@ -4,8 +4,8 @@ import com.petcelsius.api.constant.Constant;
 import com.petcelsius.api.utils.R;
 import com.petcelsius.api.utils.security.cipher.keypair.KeyPairCipherUtils;
 import com.petcelsius.api.utils.security.cipher.onekey.OneKeyCipherUtils;
-import com.petcelsius.api.utils.security.digest.DigestUtil;
-import com.petcelsius.api.utils.security.digest.MessageDigestUtil;
+import com.petcelsius.api.utils.security.digest.MessageDigestBase64Util;
+import com.petcelsius.api.utils.security.digest.MessageDigestHexUtil;
 import org.junit.jupiter.api.Test;
 
 
@@ -24,17 +24,17 @@ class SecurityUtilsTest {
 
         // 消息摘要测试
 
-        R digest1 = DigestUtil.doDigest(origin);
-        R digest2 = DigestUtil.doDigest(origin, true);
-        R digest3 = DigestUtil.doDigest(origin, false);
-        R digest4 = DigestUtil.doDigest(origin, DigestUtil.DigestTypeSelector.SHA_256, true);
-        R digest5 = DigestUtil.doDigest(origin, DigestUtil.DigestTypeSelector.SHA_256, false);
+        R digest1 = MessageDigestBase64Util.doDigest(origin);
+        R digest2 = MessageDigestBase64Util.doDigest(origin, true);
+        R digest3 = MessageDigestBase64Util.doDigest(origin, false);
+        R digest4 = MessageDigestBase64Util.doDigest(origin, MessageDigestBase64Util.DigestTypeSelector.SHA_256, true);
+        R digest5 = MessageDigestBase64Util.doDigest(origin, MessageDigestBase64Util.DigestTypeSelector.SHA_256, false);
 
-        R plus1 = DigestUtil.doPlusDigest(origin, origin);
-        R plus2 = DigestUtil.doPlusDigest(origin, origin, true);
-        R plus3 = DigestUtil.doPlusDigest(origin, origin, false);
-        R plus4 = DigestUtil.doPlusDigest(origin, origin, DigestUtil.DigestTypeSelector.SHA_512, true);
-        R plus5 = DigestUtil.doPlusDigest(origin, origin, DigestUtil.DigestTypeSelector.SHA_512,false);
+        R plus1 = MessageDigestBase64Util.doPlusDigest(origin, origin);
+        R plus2 = MessageDigestBase64Util.doPlusDigest(origin, origin, true);
+        R plus3 = MessageDigestBase64Util.doPlusDigest(origin, origin, false);
+        R plus4 = MessageDigestBase64Util.doPlusDigest(origin, origin, MessageDigestBase64Util.DigestTypeSelector.SHA_512, true);
+        R plus5 = MessageDigestBase64Util.doPlusDigest(origin, origin, MessageDigestBase64Util.DigestTypeSelector.SHA_512,false);
 
         System.out.println(digest1);
         System.out.println(digest2);
@@ -59,17 +59,17 @@ class SecurityUtilsTest {
 
         // 消息摘要测试
 
-        MessageDigestUtil.Encrypt digest1 = MessageDigestUtil.doDigest(origin);
-        MessageDigestUtil.Encrypt digest2 = MessageDigestUtil.doDigest(origin, true);
-        MessageDigestUtil.Encrypt digest3 = MessageDigestUtil.doDigest(origin, false);
-        MessageDigestUtil.Encrypt digest4 = MessageDigestUtil.doDigest(origin, MessageDigestUtil.DigestTypeSelector.SHA_256, true);
-        MessageDigestUtil.Encrypt digest5 = MessageDigestUtil.doDigest(origin, MessageDigestUtil.DigestTypeSelector.SHA_256, false);
+        MessageDigestHexUtil.Encrypt digest1 = MessageDigestHexUtil.doDigest(origin);
+        MessageDigestHexUtil.Encrypt digest2 = MessageDigestHexUtil.doDigest(origin, true);
+        MessageDigestHexUtil.Encrypt digest3 = MessageDigestHexUtil.doDigest(origin, false);
+        MessageDigestHexUtil.Encrypt digest4 = MessageDigestHexUtil.doDigest(origin, MessageDigestHexUtil.DigestTypeSelector.SHA_256, true);
+        MessageDigestHexUtil.Encrypt digest5 = MessageDigestHexUtil.doDigest(origin, MessageDigestHexUtil.DigestTypeSelector.SHA_256, false);
 
-        MessageDigestUtil.Encrypt plus1 = MessageDigestUtil.doPlusDigest(origin, origin);
-        MessageDigestUtil.Encrypt plus2 = MessageDigestUtil.doPlusDigest(origin, origin, true);
-        MessageDigestUtil.Encrypt plus3 = MessageDigestUtil.doPlusDigest(origin, origin, false);
-        MessageDigestUtil.Encrypt plus4 = MessageDigestUtil.doPlusDigest(origin, origin, MessageDigestUtil.DigestTypeSelector.SHA_512, true);
-        MessageDigestUtil.Encrypt plus5 = MessageDigestUtil.doPlusDigest(origin, origin, MessageDigestUtil.DigestTypeSelector.SHA_512,false);
+        MessageDigestHexUtil.Encrypt plus1 = MessageDigestHexUtil.doPlusDigest(origin, origin);
+        MessageDigestHexUtil.Encrypt plus2 = MessageDigestHexUtil.doPlusDigest(origin, origin, true);
+        MessageDigestHexUtil.Encrypt plus3 = MessageDigestHexUtil.doPlusDigest(origin, origin, false);
+        MessageDigestHexUtil.Encrypt plus4 = MessageDigestHexUtil.doPlusDigest(origin, origin, MessageDigestHexUtil.DigestTypeSelector.SHA_512, true);
+        MessageDigestHexUtil.Encrypt plus5 = MessageDigestHexUtil.doPlusDigest(origin, origin, MessageDigestHexUtil.DigestTypeSelector.SHA_512,false);
 
         System.out.println(digest1.getStrCode());
         System.out.println(digest2.getStrCode());
@@ -172,6 +172,4 @@ class SecurityUtilsTest {
         System.out.println(decrypt2.getStrCode());
 
     }
-
-
 }

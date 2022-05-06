@@ -13,8 +13,9 @@ import java.security.MessageDigest;
  * @author : 李奇凇
  * @date : 2022/5/5 8:46
  * @do : 信息摘要的工具类,md5.sha1,sha256.sha512,转换器有两种一个base64，一个hex（十六进制）,是不可逆的， 也就是不能解密
+ * return 的是 R对象，数据是被转码成base64
  */
-public class DigestUtil {
+public class MessageDigestBase64Util {
 
     // 信息加密的摘要方式，用于设置默认
     private static final String DIGEST_TYPE_MD = "MD5";

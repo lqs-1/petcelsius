@@ -5,7 +5,7 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * @author : 李奇凇
  * @date : 2022/5/5 10:02
- * @do : 返回摘要数据的转换器
+ * @do : 数据转码器
  */
 public class Converter {
 
