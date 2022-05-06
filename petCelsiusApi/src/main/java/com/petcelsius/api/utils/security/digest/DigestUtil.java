@@ -12,7 +12,7 @@ import java.security.MessageDigest;
 /**
  * @author : 李奇凇
  * @date : 2022/5/5 8:46
- * @do : md5的工具类,md5.sha1,sha256.sha512,转换器有两种一个base64，一个hex（十六进制）,是不可逆的， 也就是不能解密
+ * @do : 信息摘要的工具类,md5.sha1,sha256.sha512,转换器有两种一个base64，一个hex（十六进制）,是不可逆的， 也就是不能解密
  */
 public class DigestUtil {
 

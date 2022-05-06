@@ -9,6 +9,11 @@ import com.petcelsius.api.utils.security.digest.MessageDigestUtil;
 import org.junit.jupiter.api.Test;
 
 
+/**
+ * @author : 李奇凇
+ * @date : 2022/5/5 8:46
+ * @do : 加密工具类测试
+ */
 class SecurityUtilsTest {
 
     @Test
