@@ -175,9 +175,9 @@ public class DigestUtil {
             byte[] digest = md.digest(originString.getBytes(CODING_TYPE));
 
             // 转换格式
-            String digestString = Converter.converterBytesToBase64(digest);
+            String md5String = Converter.converterBytesToBase64(digest);
 
-            return R.ok().put(Constant.DIGEST_RESULT_NAME, digestString);
+            return R.ok().put(Constant.DIGEST_RESULT_NAME, md5String);
 
         } catch (Exception e) {
 
@@ -235,9 +235,9 @@ public class DigestUtil {
             byte[] digest = md.digest();
 
             // 转换
-            String digestString = Converter.converterBytesToBase64(digest);
+            String md5String = Converter.converterBytesToBase64(digest);
 
-            return R.ok().put(Constant.DIGEST_RESULT_NAME, digestString);
+            return R.ok().put(Constant.DIGEST_RESULT_NAME, md5String);
 
         } catch (Exception e) {
 
