@@ -25,67 +25,46 @@
 /* 透明度 */
 /* 文章场景相关 */
 page {
-  background-color: #F3F3F4;
+  background-color: #F2F3F4;
 }
-.not_login {
+.userInfo .topicAdd {
   display: flex;
   flex-wrap: nowrap;
   background-color: #FFFFFF;
   margin: 20rpx 0;
-}
-.not_login view {
-  margin: 20rpx 20rpx;
-  text-align: left;
-  width: 650rpx;
+  width: 100%;
   height: auto;
 }
-.not_login image {
-  margin-top: 15rpx;
-  width: 50rpx;
+.userInfo .topicAdd .topic_title {
+  margin-top: 20rpx;
+  width: 120rpx;
+  height: auto;
+  align-content: center;
 }
-.logined {
+.userInfo .topicAdd .topic {
+  margin-top: 20rpx;
+}
+.userInfo .name {
   display: flex;
   flex-wrap: nowrap;
   background-color: #FFFFFF;
   margin: 20rpx 0;
+  width: 100%;
+  height: 80rpx;
 }
-.logined image {
-  border-radius: 50%;
-  margin: 20rpx 20rpx;
-  width: 100rpx;
-}
-.logined .alter-content {
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: #FFFFFF;
-}
-.logined .alter-content view {
-  margin: 20rpx 20rpx;
-  text-align: left;
-  width: 630rpx;
+.userInfo .name .username {
+  margin-top: 20rpx;
+  width: 120rpx;
   height: auto;
+  align-content: center;
 }
-.logined .alter-content image {
-  width: 50rpx;
+.userInfo .name .userInput {
+  margin-top: 20rpx;
 }
-.logined .logout-content {
-  display: flex;
-  flex-wrap: nowrap;
-  background-color: #FFFFFF;
-}
-.logined .logout-content view {
-  margin: 20rpx 20rpx;
-  text-align: left;
-  width: 630rpx;
-  height: auto;
-}
-.logined .logout-content image {
-  width: 50rpx;
-}
-.logined .content {
-  margin: 20rpx 20rpx;
-  text-align: left;
-  width: 500rpx;
-  height: auto;
+.submit {
+  height: 80rpx;
+  width: 200rpx;
+  text-align: center;
+  top: 500rpx;
 }
 

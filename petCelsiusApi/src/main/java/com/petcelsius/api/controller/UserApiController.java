@@ -268,6 +268,8 @@ public class UserApiController {
 
         String email = loginByEmailVo.getEmail();
 
+        // System.out.println(loginByEmailVo);
+
         // 验证邮箱格式
         Boolean isEmail = Re.emailValidate(email);
         if (!isEmail){

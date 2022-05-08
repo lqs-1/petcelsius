@@ -11,13 +11,18 @@
 		<!-- 已经登录 -->
 		<view v-else  class="userInfo">
 			<view class="logined">
-				<image :src="user.topic" mode="widthFix"></image>
+				<block v-if="user.topic==null">
+					<image src="../../static/1.png" mode="widthFix"></image>
+				</block>
+				<block v-else>
+					<image :src="user.topic" mode="widthFix"></image>
+				</block>
 				<view class="content">
 						<view>
-							{{user.username}}
+							昵称:&nbsp;&nbsp;{{user.username}}
 						</view>
 						<view >
-							{{user.mobile}}
+							账号:&nbsp;&nbsp;{{user.mobile}}
 						</view>
 				</view>
 			</view>
@@ -72,28 +77,48 @@
 				// console.log(this.user)
 			},
 			
-			// 跳转登录页面
+			// 跳转登录页面，默认的短信验证码登录
 			tologin(){
 					uni.navigateTo({
-						url:"../login/login"
+						url:"../../subpkg/user/loginByMobile/loginByMobile"
 					})	
 				},
+				
+				
+			// 跳转登录页面，邮箱验证码方式
+			// tologin(){
+			// 		uni.navigateTo({
+			// 			url:"../../subpkg/user/loginByEmail/loginByEmail"
+			// 		})	
+			// 	},
+				
 				
 			// 跳转用户修改页面
 			toalter(){
 				uni.navigateTo({
-					url:"../alterUserInfo/alterUserInfo"
+					url:"../../subpkg/user/alterUser/alterUser"
 				})
 			},
 			
-			// 退出登录
+			// 退出登录,使用邮箱的
+			// logout(){
+			// 	uni.removeStorageSync("user")
+			// 	uni.$showMsg("退出成功")
+			// 	uni.navigateTo({
+			// 		url:"../../subpkg/user/loginByEmail/loginByEmail"
+			// 	})
+			// }	
+							
+			// 退出登录,使用手机号的
 			logout(){
 				uni.removeStorageSync("user")
 				uni.$showMsg("退出成功")
 				uni.navigateTo({
-					url:"../login/login"
+					url:"../../subpkg/user/loginByMobile/loginByMobile"
 				})
-			}					
+			}			
+							
+							
 			}
 		
 	}
@@ -101,7 +126,7 @@
 
 <style lang="scss">
 	page{
-		background-color: #F2F3F4
+		background-color: #F3F3F4
 	}
 	
 	.userInfo{

@@ -46,28 +46,6 @@
             }
             
         }
-       
-        ,{
-			// 登录页面
-            "path" : "pages/login/login",
-            "style" :                                                                                    
-            {
-                // "navigationBarTitleText": "",
-                // "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-			// 个人信息修改页面
-            "path" : "pages/alterUserInfo/alterUserInfo",
-            "style" :                                                                                    
-            {
-                // "navigationBarTitleText": "",
-                // "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	
 	// 定义页面的子页面，子页面放在subpkg这个分包中
@@ -148,6 +126,7 @@
 			// 合作机构相关子包，详情等等
 			"root":"subpkg/cooperate",
 			"pages":[{
+				// 合作详情页面
                     "path" : "cooperateDetial/cooperateDetial",
                     "style" :                                                                                    
                 {
@@ -164,6 +143,42 @@
 			"root":"subpkg/heart",
 			"pages":[{
                     "path" : "heartDetial/heartDetial",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+		},
+		
+		{
+			// 用户相关子页面
+			"root":"subpkg/user",
+			"pages":[{
+				// 手机号登录页面
+                    "path" : "loginByMobile/loginByMobile",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+					// 修改用户信息页面
+                    "path" : "alterUser/alterUser",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+					// 邮箱登录页面
+                    "path" : "loginByEmail/loginByEmail",
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",

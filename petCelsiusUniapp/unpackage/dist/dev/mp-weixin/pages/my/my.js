@@ -183,6 +183,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -204,26 +209,44 @@ var _default =
       // console.log(this.user)
     },
 
-    // 跳转登录页面
+    // 跳转登录页面，默认的短信验证码登录
     tologin: function tologin() {
       uni.navigateTo({
-        url: "../login/login" });
+        url: "../../subpkg/user/loginByMobile/loginByMobile" });
 
     },
+
+
+    // 跳转登录页面，邮箱验证码方式
+    // tologin(){
+    // 		uni.navigateTo({
+    // 			url:"../../subpkg/user/loginByEmail/loginByEmail"
+    // 		})	
+    // 	},
+
 
     // 跳转用户修改页面
     toalter: function toalter() {
       uni.navigateTo({
-        url: "../alterUserInfo/alterUserInfo" });
+        url: "../../subpkg/user/alterUser/alterUser" });
 
     },
 
-    // 退出登录
+    // 退出登录,使用邮箱的
+    // logout(){
+    // 	uni.removeStorageSync("user")
+    // 	uni.$showMsg("退出成功")
+    // 	uni.navigateTo({
+    // 		url:"../../subpkg/user/loginByEmail/loginByEmail"
+    // 	})
+    // }	
+
+    // 退出登录,使用手机号的
     logout: function logout() {
       uni.removeStorageSync("user");
       uni.$showMsg("退出成功");
       uni.navigateTo({
-        url: "../login/login" });
+        url: "../../subpkg/user/loginByMobile/loginByMobile" });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

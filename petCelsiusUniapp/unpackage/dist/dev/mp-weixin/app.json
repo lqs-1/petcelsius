@@ -3,9 +3,7 @@
     "pages/home/home",
     "pages/heart/heart",
     "pages/cooperate/cooperate",
-    "pages/my/my",
-    "pages/login/login",
-    "pages/alterUserInfo/alterUserInfo"
+    "pages/my/my"
   ],
   "subPackages": [
     {
@@ -34,6 +32,14 @@
       "root": "subpkg/heart",
       "pages": [
         "heartDetial/heartDetial"
+      ]
+    },
+    {
+      "root": "subpkg/user",
+      "pages": [
+        "loginByMobile/loginByMobile",
+        "alterUser/alterUser",
+        "loginByEmail/loginByEmail"
       ]
     }
   ],
@@ -73,6 +79,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

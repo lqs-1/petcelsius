@@ -39,6 +39,7 @@ public class R extends HashMap<String, Object> {
 
     public static R error(String msg) {
         R r = new R();
+        r.put("code", REnum.FAIL.getStatusCode());
         r.put("msg", msg);
         return r;
     }

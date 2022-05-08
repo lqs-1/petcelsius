@@ -7,13 +7,13 @@
             <view class="title-content">
                 <text class="title">账号</text>
             </view>
-            <input v-model="mobile" class="input" placeholder="手机号" style="margin-left: 40rpx;" />
+            <input v-model="email" class="input" placeholder="邮箱地址" style="margin-left: 40rpx;" />
         </view>
         <view class="input-item">
             <view class="title-content"	>
                 <text class="title">验证码</text>
             </view>
-            <input v-model="smsCode" class="input" placeholder="请输入短信验证码" style="margin-left: 40rpx;" />
+            <input v-model="emailCode" class="input" placeholder="请输入邮箱验证码" style="margin-left: 40rpx;" />
 			<view class="get" @tap="getCheckNum()">
 			 <text>{{!codeTime?'获取验证码':codeTime+'s'}}</text>
 			 </view>
@@ -29,8 +29,8 @@
             return {
                 title: 'Hello',
 				codeTime :0,
-				mobile: "",
-				smsCode: "",
+				email: "",
+				emailCode: "",
             }
         },
         onLoad() {
@@ -41,9 +41,9 @@
 			// 完成登录信息， 这个时候，不能用session和cookie所以用uniapp自带的存储功能
             async login() {		
 				// 请求登录，返回登录后的用户信息
-			   let response = await uni.$http.post('userApi/loginUser', {"mobile": this.mobile, "smsCode": this.smsCode})
+			   let response = await uni.$http.post('userApi/emailLogin', {"email": this.email, "emailCode": this.emailCode})
 			   
-			   // console.log(response)
+			   console.log(response)
 			   // 登录成功就存储登录信息
 			   if (response.data.code == 0){
 				   uni.setStorageSync("user", response.data.user)
@@ -53,15 +53,15 @@
 				   })
 			   }
 			   // 登录失败
-			   if(response.data.code == 1){
-				   uni.$showMsg("登录失败")
+			   if(response.data.code != 0){
+				   uni.$showMsg("登录失败,请检测手机号和验证码")
 			   }
 			   
             },
 			
 			// 获取验证码
 		   async getCheckNum(){
-			   await uni.$http.get('userApi/getSmsCode/' + this.mobile)
+			   await uni.$http.get('userApi/getEmailCode/' + this.email)
 			   uni.$showMsg("验证码发送成功")
 				if(this.codeTime>0){
 					 

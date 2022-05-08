@@ -172,4 +172,15 @@ class SecurityUtilsTest {
         System.out.println(decrypt2.getStrCode());
 
     }
+
+
+
+    @Test
+    void testNull(){
+        MessageDigestHexUtil.Encrypt encrypt = MessageDigestHexUtil.doDigest(null);
+        R digest = MessageDigestBase64Util.doDigest(null);
+
+        System.out.println(encrypt.getStrCode());
+        System.out.println(digest.get(Constant.DIGEST_RESULT_NAME));
+    }
 }
