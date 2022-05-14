@@ -14,6 +14,7 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 @Configuration
 public class JedisPollFactory {
+
     @Value("${spring.redis.host}")
     private String host;
 
