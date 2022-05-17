@@ -79,7 +79,6 @@ public class EmailCodeUtils {
     }
 
 
-
     public R sendHtmlEmailCode(String email, String emailCode){
         MimeMessage mailMessage = javaMailSender.createMimeMessage();
         //需要借助Helper类

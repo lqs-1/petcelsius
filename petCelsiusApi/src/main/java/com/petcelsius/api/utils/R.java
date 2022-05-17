@@ -68,7 +68,7 @@ public class R extends HashMap<String, Object> {
 
 
     public static void main(String[] args) {
-        R ok = R.error();
+        R ok = R.error().put("hah", "eee").put("name", "haha");
         System.out.println(ok);
     }
 }
